@@ -4,4 +4,12 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Activities Feed.unity
+  - enabled: 1
+    path: Assets/Scenes/Current Activities.unity
+  - enabled: 1
+    path: Assets/Scenes/Profile.unity
+  - enabled: 1
+    path: Assets/Scenes/Settings.unity
