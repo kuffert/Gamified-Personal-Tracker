@@ -217,6 +217,7 @@ MonoBehaviour:
     type: 3}
   settingsIcon: {fileID: 21300000, guid: e8a88f199ec3afb44a7c00c0cda53b8d, type: 3}
   profileIcon: {fileID: 21300000, guid: 29ae84105af85ce42adb71a213602c56, type: 3}
+  taskbar: {fileID: 21300000, guid: aff5c62149ac3334384afa3d62a2bc62, type: 3}
   currentScreenText: Activities Feed
   numberOfButtons: 4
   taskbarFractionOfScreen: 10
