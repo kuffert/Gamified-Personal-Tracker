@@ -1,9 +1,6 @@
 ﻿using UnityEngine;
-using System.Collections;
-using System;
 using System.Collections.Generic;
 
-[Serializable]
 public class Activity {
 
 	string title;
@@ -16,6 +13,9 @@ public class Activity {
 	string location;
 	string recurrence;
 	int academicStanding; // May need to make this an enum as well. year 1,2,3,4,5
-	string major; 
+	string major;
 
+    Activity()
+    {
+    }
 }
