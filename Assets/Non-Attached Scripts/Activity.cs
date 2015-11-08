@@ -1,14 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.IO;
+using System.Collections.Generic;
 
 [Serializable]
 public class Activity {
 
 	string title;
-	ArrayList topicsOfInterest;
+	List<Activity> topicsOfInterest;
 	string description;
 	string startDate; // needs a proper date format
 	string endDate;   // needs a proper date format

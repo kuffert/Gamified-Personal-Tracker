@@ -3,6 +3,7 @@ using System.Collections;
 using System;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
+using System.Collections.Generic;
 
 public class AppController : MonoBehaviour {
 
@@ -24,7 +25,7 @@ public class AppController : MonoBehaviour {
 	int PPEexp;
 	int WBexp;
 
-	ArrayList currentActivities;
+	List<Activity> currentActivities;
 
 	void Awake () {
 		if (appController == null) {
@@ -74,10 +75,10 @@ public class AppController : MonoBehaviour {
 		private int PPEexp;
 		private int WBexp;
 
-		private ArrayList currentActivities;
+		private List<Activity> currentActivities;
 
 		public UserData() {
-			currentActivities = new ArrayList();
+			currentActivities = new List<Activity>();
 		}
 
         string getUsername() { return username; }
@@ -93,7 +94,7 @@ public class AppController : MonoBehaviour {
         int getSCExp() { return SCexp; }
         int getPPEExp() { return PPEexp; }
         int getWBexp() { return WBexp; }
-        ArrayList getCurrentActivities() { return currentActivities; }
+        List<Activity> getCurrentActivities() { return currentActivities; }
 
         void setUsername(string username) { this.username = username; }
         void setMajor(string major) { this.major = major; }
@@ -108,7 +109,7 @@ public class AppController : MonoBehaviour {
         void setSCExp(int exp) { this.SCexp = exp; }
         void setPPEExp(int exp) { this.PPEexp = exp; }
         void setWBExp(int exp) { this.WBexp = exp; }
-        void setCurrentActivities(ArrayList currentActivities) { this.currentActivities = currentActivities; }
+        void setCurrentActivities(List<Activity> currentActivities) { this.currentActivities = currentActivities; }
 
         public void saveUserData()
         {
