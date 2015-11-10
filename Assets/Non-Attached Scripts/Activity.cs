@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
+// Author: Chris Kuffert
+// Date: 11/8/2015
 public class Activity {
 
 	string title;
@@ -25,7 +27,10 @@ public class Activity {
 	List<Skill> skills;
 	string engagement;
 
-    Activity()
+    public Activity(string title)
     {
+        this.title = title;
     }
+
+    public string getTitle() { return title; }
 }

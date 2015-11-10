@@ -5,6 +5,8 @@ using System.Collections;
 // Date: 11/1/2015
 public class StaticFeatures : MonoBehaviour {
 
+    public static StaticFeatures staticFeatures;
+
     public Sprite backgroundImage;
     public Sprite activityFeedIcon;
     public Sprite currentActivitiesIcon;
@@ -18,6 +20,7 @@ public class StaticFeatures : MonoBehaviour {
 
     private float orthographicScreenHeight;
     private float orthographicScreenWidth;
+
     private GameObject background;
     private GameObject topTaskbar;
     private GameObject bottomTaskbar;
@@ -26,9 +29,20 @@ public class StaticFeatures : MonoBehaviour {
     private GameObject currentActivitiesButton;
     private GameObject settingsButton;
     private GameObject sceneText;
-    
+
+    public int getNumberOfButtons() { return numberOfButtons; }
+    public int getTaskbarFractionOfScreen() { return taskbarFractionOfScreen; }
+
+    public float getOrthographicScreenHeight() { return orthographicScreenHeight; }
+    public float getOrthographicScreenWidth() { return orthographicScreenWidth; }
+
+    void Awake()
+    {
+        staticFeatures = this;
+    }
+
     // Anything in here will be run, created, instantiated, etc. immediately as the application starts.
-	void Start () {
+    void Start () {
 
         // Determines the screensize we will need to scale the UI elements.
         Camera camera = Camera.main;

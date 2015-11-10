@@ -180,6 +180,8 @@ GameObject:
   m_Component:
   - 4: {fileID: 1970661155}
   - 114: {fileID: 1970661154}
+  - 114: {fileID: 1970661156}
+  - 114: {fileID: 1970661157}
   m_Layer: 0
   m_Name: AppObject
   m_TagString: Untagged
@@ -198,7 +200,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c08d51b8c660834ca626ef6fa5737fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  backgroundImage: {fileID: 21300000, guid: b15bad82bebf5464aa9ca7bb93515d0a, type: 3}
+  backgroundImage: {fileID: 21300000, guid: 8eb416c811d241549a49351cddef8ef1, type: 3}
   activityFeedIcon: {fileID: 21300000, guid: 7b7a1f8f6197c0446a767400416a58d6, type: 3}
   currentActivitiesIcon: {fileID: 21300000, guid: 69694095b65b96346b809053837c3161,
     type: 3}
@@ -220,3 +222,26 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
+--- !u!114 &1970661156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1970661153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be4110b933a112f4a8e8eb1f212d7d43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  amountOfDisplayedActivities: 10
+--- !u!114 &1970661157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1970661153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5cdab45b15c6fd14797eed011b619f0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
