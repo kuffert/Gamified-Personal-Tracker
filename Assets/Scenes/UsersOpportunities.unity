@@ -234,6 +234,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   amountOfDisplayedActivities: 10
+  fractionOfScreenPerActivity: 0
 --- !u!114 &1970661157
 MonoBehaviour:
   m_ObjectHideFlags: 0

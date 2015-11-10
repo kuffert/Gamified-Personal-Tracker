@@ -6,9 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Activities Feed.unity
+    path: Assets/Scenes/GeneralActivityFeed.unity
   - enabled: 1
-    path: Assets/Scenes/Current Activities.unity
+    path: Assets/Scenes/UsersOpportunities.unity
   - enabled: 1
     path: Assets/Scenes/Profile.unity
   - enabled: 1

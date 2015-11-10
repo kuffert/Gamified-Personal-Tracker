@@ -4,7 +4,7 @@ using SimpleJSON;
 
 // Author: Chris Kuffert
 // Date: 11/9/2015
-public class CurrentActivitiesFeed : MonoBehaviour {
+public class UsersOpportunities : MonoBehaviour {
 
     public int amountOfDisplayedActivities;
     private float fractionOfScreenPerActivity;
@@ -18,9 +18,9 @@ public class CurrentActivitiesFeed : MonoBehaviour {
     void Start () {
         saveUserTestData();
         AppController.appController.Load();
-        List<Activity> usersActivities = AppController.appController.getCurrentActivities();
+        List<Opportunity> usersActivities = AppController.appController.getCurrentOpportunities();
 
-        fractionOfScreenPerActivity = (1 - (2 * StaticFeatures.staticFeatures.getTaskbarFractionOfScreen()/ 100f)) / amountOfDisplayedActivities;
+        fractionOfScreenPerActivity = (1 - (2 * StaticFeatures.staticFeatures.getTaskbarFractionOfScreen() / 100f)) / amountOfDisplayedActivities;
 
         for (int i = 0; i < usersActivities.Count; i++)
         {
@@ -28,12 +28,11 @@ public class CurrentActivitiesFeed : MonoBehaviour {
         }
 	}
 	
-	// Update is called once per frame
 	void Update () {
-	
+        // Eventually will need delegate navigation based on touch.
 	}
 
-    private GameObject generateActivity(int activityNumber, Activity activity) 
+    private GameObject generateActivity(int activityNumber, Opportunity activity) 
     {
         GameObject newActivity = new GameObject();
         
@@ -56,15 +55,15 @@ public class CurrentActivitiesFeed : MonoBehaviour {
     // Saves some test data for the user's activities
     private void saveUserTestData()
     {
-        List<Activity> testActivities = getActivities();
+        List<Opportunity> testActivities = getActivities();
 
-        AppController.appController.setCurrentActivities(testActivities);
+        AppController.appController.setCurrentOpportunities(testActivities);
         AppController.appController.Save();
     }
 
-    private List<Activity> getActivities()
+    private List<Opportunity> getActivities()
     {
-        List<Activity> activities = new List<Activity>();
+        List<Opportunity> activities = new List<Opportunity>();
 
         // Grab data
         WWW www = new WWW(url);
@@ -72,11 +71,11 @@ public class CurrentActivitiesFeed : MonoBehaviour {
         var N = JSON.Parse(www.text);
 
         // Fill activities
-        Activity temp;
+        Opportunity temp;
         while(N.Count > 0)
         {
             Debug.Log(N.Count);
-            temp = new Activity(N[0]["title"]); // for now just putting in titles
+            temp = new Opportunity(N[0]["title"]); // for now just putting in titles
             activities.Add(temp);
             N.Remove(0);
         }

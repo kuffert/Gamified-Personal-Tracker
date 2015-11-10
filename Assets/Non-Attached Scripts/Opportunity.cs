@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 // Author: Chris Kuffert
 // Date: 11/8/2015
-public class Activity {
+public class Opportunity {
 
 	string title;
 	string format;
@@ -27,7 +27,7 @@ public class Activity {
 	List<Skill> skills;
 	string engagement;
 
-    public Activity(string title)
+    public Opportunity(string title)
     {
         this.title = title;
     }

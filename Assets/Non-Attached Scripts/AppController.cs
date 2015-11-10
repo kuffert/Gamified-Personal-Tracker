@@ -27,7 +27,7 @@ public class AppController : MonoBehaviour {
 	int PPEexp;
 	int WBexp;
 
-	List<Activity> currentActivities;
+	List<Opportunity> currentOpportunities;
 
     string getUsername() { return username; }
     string getMajor() { return major; }
@@ -42,7 +42,7 @@ public class AppController : MonoBehaviour {
     int getSCExp() { return SCexp; }
     int getPPEExp() { return PPEexp; }
     int getWBexp() { return WBexp; }
-    public List<Activity> getCurrentActivities() { return currentActivities; }
+    public List<Opportunity> getCurrentOpportunities() { return currentOpportunities; }
 
     void setUsername(string username) { this.username = username; }
     void setMajor(string major) { this.major = major; }
@@ -57,7 +57,7 @@ public class AppController : MonoBehaviour {
     void setSCExp(int exp) { this.SCexp = exp; }
     void setPPEExp(int exp) { this.PPEexp = exp; }
     void setWBExp(int exp) { this.WBexp = exp; }
-    public void setCurrentActivities(List<Activity> currentActivities) { this.currentActivities = currentActivities; }
+    public void setCurrentOpportunities(List<Opportunity> currentOpportunities) { this.currentOpportunities = currentOpportunities; }
 
     void Awake () {
 		if (appController == null) {
@@ -107,10 +107,10 @@ public class AppController : MonoBehaviour {
 		private int PPEexp;
 		private int WBexp;
 
-		private List<Activity> currentActivities;
+		private List<Opportunity> currentOpportunities;
 
 		public UserData() {
-			currentActivities = new List<Activity>();
+			currentOpportunities = new List<Opportunity>();
 		}
 
         string getUsername() { return username; }
@@ -126,7 +126,7 @@ public class AppController : MonoBehaviour {
         int getSCExp() { return SCexp; }
         int getPPEExp() { return PPEexp; }
         int getWBexp() { return WBexp; }
-        List<Activity> getCurrentActivities() { return currentActivities; }
+        List<Opportunity> getCurrentOpportunities() { return currentOpportunities; }
 
         void setUsername(string username) { this.username = username; }
         void setMajor(string major) { this.major = major; }
@@ -141,7 +141,7 @@ public class AppController : MonoBehaviour {
         void setSCExp(int exp) { this.SCexp = exp; }
         void setPPEExp(int exp) { this.PPEexp = exp; }
         void setWBExp(int exp) { this.WBexp = exp; }
-        void setCurrentActivities(List<Activity> currentActivities) { this.currentActivities = currentActivities; }
+        void setCurrentOpportunities(List<Opportunity> currentOpportunities) { this.currentOpportunities = currentOpportunities; }
 
         public void saveUserData()
         {
@@ -158,7 +158,7 @@ public class AppController : MonoBehaviour {
             setSCExp(SCexp);
             setPPEExp(PPEexp);
             setWBExp(WBexp);
-            setCurrentActivities(currentActivities);
+            setCurrentOpportunities(currentOpportunities);
         }
 
         public void loadUserData()
@@ -176,7 +176,7 @@ public class AppController : MonoBehaviour {
             SCexp = getSCExp();
             PPEexp = getPPEExp();
             WBexp = getWBexp();
-            currentActivities = getCurrentActivities();
+            currentOpportunities = getCurrentOpportunities();
         }
     }
 }
