@@ -18,6 +18,8 @@ public class StaticFeatures : MonoBehaviour {
     public int numberOfButtons;
     public int taskbarFractionOfScreen;
 
+	public Font font;
+
     private float orthographicScreenHeight;
     private float orthographicScreenWidth;
 
@@ -179,12 +181,14 @@ public class StaticFeatures : MonoBehaviour {
         GameObject sceneText = new GameObject();
         sceneText.AddComponent<TextMesh>();
         TextMesh sceneTextMesh = sceneText.GetComponent<TextMesh>();
-        sceneTextMesh.text = currentScreenText;
+		sceneTextMesh.font = font;
+		sceneTextMesh.text = currentScreenText;
         sceneTextMesh.anchor = TextAnchor.MiddleCenter;
         sceneTextMesh.characterSize = .025f;
         sceneTextMesh.fontSize = 200;
-        sceneTextMesh.color = Color.black;
-
+		// Set the text to "Northeastern Red":
+		Color NURed = new Color (204.0f, 0.0f, 0.0f);
+		sceneTextMesh.color = NURed;
         return sceneText;
     }
 
