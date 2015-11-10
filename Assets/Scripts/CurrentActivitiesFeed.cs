@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
-
+using SimpleJSON;
 
 // Author: Chris Kuffert
 // Date: 11/9/2015
@@ -8,6 +8,11 @@ public class CurrentActivitiesFeed : MonoBehaviour {
 
     public int amountOfDisplayedActivities;
     private float fractionOfScreenPerActivity;
+    private const string baseUrl = "https://api.mongolab.com/api/1";
+    private const string database = "softdevfall15";
+    private const string activitiesCollection = "opportunities";
+    private const string urlKeyEnd = "?apiKey=ZMZOg1DKKoow4p8XCzVGfX-k8P6szwZj";
+    private const string url = baseUrl + "/databases/" + database + "/collections/" + activitiesCollection + urlKeyEnd;
 
     // Use this for initialization
     void Start () {
@@ -51,31 +56,31 @@ public class CurrentActivitiesFeed : MonoBehaviour {
     // Saves some test data for the user's activities
     private void saveUserTestData()
     {
-        List<Activity> testActivities = new List<Activity>();
-
-        Activity testActivityOne = new Activity("test one");
-        Activity testActivityTwo = new Activity("test two");
-        Activity testActivityThree = new Activity("test three");
-        Activity testActivityFour = new Activity("test four");
-        Activity testActivityFive = new Activity("test five");
-        Activity testActivitySix = new Activity("test six");
-        Activity testActivitySeven = new Activity("test seven");
-        Activity testActivityEight = new Activity("test eight");
-        Activity testActivityNine = new Activity("test nine");
-        Activity testActivityTen = new Activity("test ten");
-
-        testActivities.Add(testActivityOne);
-        testActivities.Add(testActivityTwo);
-        testActivities.Add(testActivityThree);
-        testActivities.Add(testActivityFour);
-        testActivities.Add(testActivityFive);
-        testActivities.Add(testActivitySix);
-        testActivities.Add(testActivitySeven);
-        testActivities.Add(testActivityEight);
-        testActivities.Add(testActivityNine);
-        testActivities.Add(testActivityTen);
+        List<Activity> testActivities = getActivities();
 
         AppController.appController.setCurrentActivities(testActivities);
         AppController.appController.Save();
+    }
+
+    private List<Activity> getActivities()
+    {
+        List<Activity> activities = new List<Activity>();
+
+        // Grab data
+        WWW www = new WWW(url);
+        while (!www.isDone) {/*do nothing, does not work otherwise*/}
+        var N = JSON.Parse(www.text);
+
+        // Fill activities
+        Activity temp;
+        while(N.Count > 0)
+        {
+            Debug.Log(N.Count);
+            temp = new Activity(N[0]["title"]); // for now just putting in titles
+            activities.Add(temp);
+            N.Remove(0);
+        }
+        Debug.Log(activities.Count);
+        return activities;
     }
 }
