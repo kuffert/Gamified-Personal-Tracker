@@ -13,6 +13,7 @@ public class UsersOpportunities : MonoBehaviour {
     private const string activitiesCollection = "opportunities";
     private const string urlKeyEnd = "?apiKey=ZMZOg1DKKoow4p8XCzVGfX-k8P6szwZj";
     private const string url = baseUrl + "/databases/" + database + "/collections/" + activitiesCollection + urlKeyEnd;
+    private int numberOfVisibleCharacters = 35;
 
     // Use this for initialization
     void Start () {
@@ -38,17 +39,20 @@ public class UsersOpportunities : MonoBehaviour {
         
         newActivity.AddComponent<TextMesh>();
         TextMesh newText = newActivity.GetComponent<TextMesh>();
-        newText.text = activity.getTitle();
+        int titleLength = activity.getTitle().Length;
+        Debug.Log(titleLength);
+        newText.text = titleLength < numberOfVisibleCharacters? activity.getTitle() : activity.getTitle().Substring(0, (titleLength < numberOfVisibleCharacters ? titleLength : numberOfVisibleCharacters)) + "...";
         newText.anchor = TextAnchor.UpperLeft;
         newText.characterSize = .025f;
-        newText.fontSize = 200;
+        newText.fontSize = 200 - titleLength;
         newText.color = Color.black;
         
         newActivity.transform.position = Camera.main.ViewportToWorldPoint(new Vector3(0f, 1f - (StaticFeatures.staticFeatures.getTaskbarFractionOfScreen() / 100f + activityNumber * fractionOfScreenPerActivity), 10));
         newActivity.GetComponent<MeshRenderer>().sortingOrder = 4;
 
         newActivity.AddComponent<BoxCollider>();
-
+        newActivity.GetComponent<BoxCollider>().size = new Vector3(StaticFeatures.staticFeatures.getOrthographicScreenWidth(), StaticFeatures.staticFeatures.getOrthographicScreenHeight() * fractionOfScreenPerActivity, 0);
+        newActivity.GetComponent<BoxCollider>().center = new Vector3(StaticFeatures.staticFeatures.getOrthographicScreenWidth() * .5f, newActivity.GetComponent<BoxCollider>().size.y /-2f, 0f);
         return newActivity;
     }
 

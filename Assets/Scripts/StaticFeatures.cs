@@ -38,7 +38,15 @@ public class StaticFeatures : MonoBehaviour {
 
     void Awake()
     {
-        staticFeatures = this;
+        if (staticFeatures == null)
+        {
+            DontDestroyOnLoad(gameObject);
+            staticFeatures = this;
+        }
+        else if (staticFeatures != this)
+        {
+            Destroy(staticFeatures);
+        }
     }
 
     // Anything in here will be run, created, instantiated, etc. immediately as the application starts.
@@ -205,12 +213,12 @@ public class StaticFeatures : MonoBehaviour {
 
                 if (activityFeedButton.GetComponent<Collider>().Raycast(ray, out hit, 100.0F))
                 {
-                    Application.LoadLevel("Activities Feed");
+                    Application.LoadLevel("GeneralOpportunityFeed");
                 }
 
                 if (currentActivitiesButton.GetComponent<Collider>().Raycast(ray, out hit, 100.0F))
                 {
-                    Application.LoadLevel("Current Activities");
+                    Application.LoadLevel("UsersOpportunities");
                 }
 
                 if (settingsButton.GetComponent<Collider>().Raycast(ray, out hit, 100.0F))
