@@ -7,8 +7,8 @@ using SimpleJSON;
 public class UsersOpportunities : MonoBehaviour {
 
 	public Font font;
-    public int amountOfDisplayedActivities;
-    private float fractionOfScreenPerActivity;
+    public int amountOfDisplayedOpportunties;
+    private float fractionOfScreenPerOpportunity;
     private const string baseUrl = "https://api.mongolab.com/api/1";
     private const string database = "softdevfall15";
     private const string activitiesCollection = "opportunities";
@@ -23,11 +23,11 @@ public class UsersOpportunities : MonoBehaviour {
         AppController.appController.Load();
         List<Opportunity> usersActivities = AppController.appController.getCurrentOpportunities();
 
-        fractionOfScreenPerActivity = (1 - (2 * StaticFeatures.staticFeatures.getTaskbarFractionOfScreen() / 100f)) / amountOfDisplayedActivities;
+        fractionOfScreenPerOpportunity = (1 - (2 * StaticFeatures.staticFeatures.getTaskbarFractionOfScreen() / 100f)) / amountOfDisplayedOpportunties;
 
         for (int i = 0; i < usersActivities.Count; i++)
         {
-            generateActivity(i, usersActivities[i]);
+            generateOpportunity(i, usersActivities[i]);
         }
 	}
 	
@@ -35,28 +35,28 @@ public class UsersOpportunities : MonoBehaviour {
         // Eventually will need delegate navigation based on touch.
 	}
 
-    private GameObject generateActivity(int activityNumber, Opportunity activity) 
+    private GameObject generateOpportunity(int opportunityNumber, Opportunity opportunity) 
     {
-        GameObject newActivity = new GameObject();
+        GameObject newOpportunity = new GameObject();
         
-        newActivity.AddComponent<TextMesh>();
-        TextMesh newText = newActivity.GetComponent<TextMesh>();
-        int titleLength = activity.getTitle().Length;
+        newOpportunity.AddComponent<TextMesh>();
+        TextMesh newText = newOpportunity.GetComponent<TextMesh>();
+        int titleLength = opportunity.getTitle().Length;
         Debug.Log(titleLength);
-        newText.text = titleLength < numberOfVisibleCharacters? activity.getTitle() : activity.getTitle().Substring(0, (titleLength < numberOfVisibleCharacters ? titleLength : numberOfVisibleCharacters)) + "...";
+        newText.text = titleLength < numberOfVisibleCharacters? opportunity.getTitle() : opportunity.getTitle().Substring(0, (titleLength < numberOfVisibleCharacters ? titleLength : numberOfVisibleCharacters)) + "...";
         newText.anchor = TextAnchor.UpperLeft;
         newText.characterSize = .025f;
         newText.fontSize = 200 - titleLength;
 		newText.color = NURed;
 		//newText.font = font; This is broken at the moment, its causing a ton of problems
         
-        newActivity.transform.position = Camera.main.ViewportToWorldPoint(new Vector3(0f, 1f - (StaticFeatures.staticFeatures.getTaskbarFractionOfScreen() / 100f + activityNumber * fractionOfScreenPerActivity), 10));
-        newActivity.GetComponent<MeshRenderer>().sortingOrder = 4;
+        newOpportunity.transform.position = Camera.main.ViewportToWorldPoint(new Vector3(0f, 1f - (StaticFeatures.staticFeatures.getTaskbarFractionOfScreen() / 100f + opportunityNumber * fractionOfScreenPerOpportunity), 10));
+        newOpportunity.GetComponent<MeshRenderer>().sortingOrder = 4;
 
-        newActivity.AddComponent<BoxCollider>();
-        newActivity.GetComponent<BoxCollider>().size = new Vector3(StaticFeatures.staticFeatures.getOrthographicScreenWidth(), StaticFeatures.staticFeatures.getOrthographicScreenHeight() * fractionOfScreenPerActivity, 0);
-        newActivity.GetComponent<BoxCollider>().center = new Vector3(StaticFeatures.staticFeatures.getOrthographicScreenWidth() * .5f, newActivity.GetComponent<BoxCollider>().size.y /-2f, 0f);
-        return newActivity;
+        newOpportunity.AddComponent<BoxCollider>();
+        newOpportunity.GetComponent<BoxCollider>().size = new Vector3(StaticFeatures.staticFeatures.getOrthographicScreenWidth(), StaticFeatures.staticFeatures.getOrthographicScreenHeight() * fractionOfScreenPerOpportunity, 0);
+        newOpportunity.GetComponent<BoxCollider>().center = new Vector3(StaticFeatures.staticFeatures.getOrthographicScreenWidth() * .5f, newOpportunity.GetComponent<BoxCollider>().size.y /-2f, 0f);
+        return newOpportunity;
     }
 
     // Saves some test data for the user's activities

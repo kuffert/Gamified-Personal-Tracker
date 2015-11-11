@@ -8,8 +8,8 @@ public class StaticFeatures : MonoBehaviour {
     public static StaticFeatures staticFeatures;
 
     public Sprite backgroundImage;
-    public Sprite activityFeedIcon;
-    public Sprite currentActivitiesIcon;
+    public Sprite opportunityFeedIcon;
+    public Sprite youOpportunitiesIcon;
     public Sprite settingsIcon;
     public Sprite profileIcon;
     public Sprite taskbar;
@@ -27,8 +27,8 @@ public class StaticFeatures : MonoBehaviour {
     private GameObject topTaskbar;
     private GameObject bottomTaskbar;
     private GameObject profileButton;
-    private GameObject activityFeedButton;
-    private GameObject currentActivitiesButton;
+    private GameObject opportunityFeedButton;
+    private GameObject yourOpportunitiesButton;
     private GameObject settingsButton;
     private GameObject sceneText;
 
@@ -40,15 +40,7 @@ public class StaticFeatures : MonoBehaviour {
 
     void Awake()
     {
-        if (staticFeatures == null)
-        {
-            DontDestroyOnLoad(gameObject);
-            staticFeatures = this;
-        }
-        else if (staticFeatures != this)
-        {
-            Destroy(staticFeatures);
-        }
+        staticFeatures = this;
     }
 
     // Anything in here will be run, created, instantiated, etc. immediately as the application starts.
@@ -64,8 +56,8 @@ public class StaticFeatures : MonoBehaviour {
         topTaskbar = generateTaskbar(taskbar);
         bottomTaskbar = generateTaskbar(taskbar);
         profileButton = generateDynamicElement(profileIcon);
-        activityFeedButton = generateDynamicElement(activityFeedIcon);
-        currentActivitiesButton = generateDynamicElement(currentActivitiesIcon);
+        opportunityFeedButton = generateDynamicElement(opportunityFeedIcon);
+        yourOpportunitiesButton = generateDynamicElement(youOpportunitiesIcon);
         settingsButton = generateDynamicElement(settingsIcon);
 
         // Display the text, assigning its string value depending on the current scene.
@@ -87,8 +79,8 @@ public class StaticFeatures : MonoBehaviour {
         topTaskbar.transform.position = camera.ViewportToWorldPoint(new Vector3(.5f, 1 - buttonOffsetY, 10));
         bottomTaskbar.transform.position = camera.ViewportToWorldPoint(new Vector3(.5f, buttonOffsetY, 10));
         profileButton.transform.position = camera.ViewportToWorldPoint(new Vector3(buttonOffsetX, buttonPlacementY - buttonOffsetY, 10));
-        activityFeedButton.transform.position = camera.ViewportToWorldPoint(new Vector3(buttonOffsetX + buttonPlacementX, buttonPlacementY - buttonOffsetY, 10));
-        currentActivitiesButton.transform.position = camera.ViewportToWorldPoint(new Vector3(buttonOffsetX + buttonPlacementX * 2, buttonPlacementY - buttonOffsetY, 10));
+        opportunityFeedButton.transform.position = camera.ViewportToWorldPoint(new Vector3(buttonOffsetX + buttonPlacementX, buttonPlacementY - buttonOffsetY, 10));
+        yourOpportunitiesButton.transform.position = camera.ViewportToWorldPoint(new Vector3(buttonOffsetX + buttonPlacementX * 2, buttonPlacementY - buttonOffsetY, 10));
         settingsButton.transform.position = camera.ViewportToWorldPoint(new Vector3(buttonOffsetX + buttonPlacementX * 3, buttonPlacementY - buttonOffsetY, 10));
     }
 	
@@ -215,12 +207,12 @@ public class StaticFeatures : MonoBehaviour {
                     Application.LoadLevel("Profile");
                 }
 
-                if (activityFeedButton.GetComponent<Collider>().Raycast(ray, out hit, 100.0F))
+                if (opportunityFeedButton.GetComponent<Collider>().Raycast(ray, out hit, 100.0F))
                 {
                     Application.LoadLevel("GeneralOpportunityFeed");
                 }
 
-                if (currentActivitiesButton.GetComponent<Collider>().Raycast(ray, out hit, 100.0F))
+                if (yourOpportunitiesButton.GetComponent<Collider>().Raycast(ray, out hit, 100.0F))
                 {
                     Application.LoadLevel("UsersOpportunities");
                 }

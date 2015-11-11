@@ -115,8 +115,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   backgroundImage: {fileID: 21300000, guid: 9cebde3aa1ef04c699588a6c5ba37053, type: 3}
-  activityFeedIcon: {fileID: 21300000, guid: bdc2e50e641e2486480868db258bc930, type: 3}
-  currentActivitiesIcon: {fileID: 21300000, guid: 239add0b16ca04e8c863d75a14f7256b,
+  opportunityFeedIcon: {fileID: 21300000, guid: bdc2e50e641e2486480868db258bc930,
+    type: 3}
+  youOpportunitiesIcon: {fileID: 21300000, guid: 239add0b16ca04e8c863d75a14f7256b,
     type: 3}
   settingsIcon: {fileID: 21300000, guid: 71b78582029854c39a089559fcde626a, type: 3}
   profileIcon: {fileID: 21300000, guid: d5f0c1fe7da2543e685ad6a3a30cf702, type: 3}
@@ -160,7 +161,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   font: {fileID: 0}
-  amountOfDisplayedActivities: 10
+  amountOfDisplayedOpportunties: 10
 --- !u!1 &731007044
 GameObject:
   m_ObjectHideFlags: 0
