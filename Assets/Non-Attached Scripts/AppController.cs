@@ -60,13 +60,8 @@ public class AppController : MonoBehaviour {
     public void setCurrentOpportunities(List<Opportunity> currentOpportunities) { this.currentOpportunities = currentOpportunities; }
 
     void Awake () {
-		if (appController == null) {
-			DontDestroyOnLoad (gameObject);
 			appController = this;
-		} 
-		else if (appController != this) {
-			Destroy (appController);
-		}
+		
 	}
 	
 	public void Save() {

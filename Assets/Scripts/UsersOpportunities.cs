@@ -45,7 +45,7 @@ public class UsersOpportunities : MonoBehaviour {
         newText.characterSize = .025f;
         newText.fontSize = 200;
 		newText.color = NURed;
-		newText.font = font;
+		//newText.font = font; This is broken at the moment, its causing a ton of problems
         
         newActivity.transform.position = Camera.main.ViewportToWorldPoint(new Vector3(0f, 1f - (StaticFeatures.staticFeatures.getTaskbarFractionOfScreen() / 100f + activityNumber * fractionOfScreenPerActivity), 10));
         newActivity.GetComponent<MeshRenderer>().sortingOrder = 4;

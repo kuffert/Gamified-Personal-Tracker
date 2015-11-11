@@ -180,7 +180,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 830465891}
   - 114: {fileID: 830465892}
-  - 23: {fileID: 830465894}
   - 114: {fileID: 830465893}
   m_Layer: 0
   m_Name: AppObject
@@ -219,9 +218,10 @@ MonoBehaviour:
   settingsIcon: {fileID: 21300000, guid: 71b78582029854c39a089559fcde626a, type: 3}
   profileIcon: {fileID: 21300000, guid: d5f0c1fe7da2543e685ad6a3a30cf702, type: 3}
   taskbar: {fileID: 21300000, guid: 0c2258e02faa24163887200f7097ff3b, type: 3}
-  currentScreenText: Activities Feed
+  currentScreenText: Opportunities
   numberOfButtons: 4
   taskbarFractionOfScreen: 10
+  font: {fileID: 12800000, guid: 39c3d5648da8c4e248c24456ee09df37, type: 3}
 --- !u!114 &830465893
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -233,27 +233,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cdab45b15c6fd14797eed011b619f0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!23 &830465894
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 830465890}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_Materials:
-  - {fileID: 10100, guid: 0000000000000000e000000000000000, type: 0}
-  m_SubsetIndices: 
-  m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 1
-  m_ReflectionProbeUsage: 1
-  m_ProbeAnchor: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_PreserveUVs: 0
-  m_ImportantGI: 0
-  m_AutoUVMaxDistance: .5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingOrder: 0

@@ -40,7 +40,15 @@ public class StaticFeatures : MonoBehaviour {
 
     void Awake()
     {
-        staticFeatures = this;
+        if (staticFeatures == null)
+        {
+            DontDestroyOnLoad(gameObject);
+            staticFeatures = this;
+        }
+        else if (staticFeatures != this)
+        {
+            Destroy(staticFeatures);
+        }
     }
 
     // Anything in here will be run, created, instantiated, etc. immediately as the application starts.
@@ -181,7 +189,7 @@ public class StaticFeatures : MonoBehaviour {
         GameObject sceneText = new GameObject();
         sceneText.AddComponent<TextMesh>();
         TextMesh sceneTextMesh = sceneText.GetComponent<TextMesh>();
-		sceneTextMesh.font = font;
+		//sceneTextMesh.font = font; Something about this is broken, and its causing a ton of problems.
 		sceneTextMesh.text = currentScreenText;
         sceneTextMesh.anchor = TextAnchor.MiddleCenter;
         sceneTextMesh.characterSize = .025f;
@@ -209,12 +217,12 @@ public class StaticFeatures : MonoBehaviour {
 
                 if (activityFeedButton.GetComponent<Collider>().Raycast(ray, out hit, 100.0F))
                 {
-                    Application.LoadLevel("Activities Feed");
+                    Application.LoadLevel("GeneralActivityFeed");
                 }
 
                 if (currentActivitiesButton.GetComponent<Collider>().Raycast(ray, out hit, 100.0F))
                 {
-                    Application.LoadLevel("Current Activities");
+                    Application.LoadLevel("UsersOpportunities");
                 }
 
                 if (settingsButton.GetComponent<Collider>().Raycast(ray, out hit, 100.0F))
