@@ -6,6 +6,7 @@ using SimpleJSON;
 // Date: 11/9/2015
 public class UsersOpportunities : MonoBehaviour {
 
+	public Font font;
     public int amountOfDisplayedActivities;
     private float fractionOfScreenPerActivity;
     private const string baseUrl = "https://api.mongolab.com/api/1";
@@ -14,6 +15,7 @@ public class UsersOpportunities : MonoBehaviour {
     private const string urlKeyEnd = "?apiKey=ZMZOg1DKKoow4p8XCzVGfX-k8P6szwZj";
     private const string url = baseUrl + "/databases/" + database + "/collections/" + activitiesCollection + urlKeyEnd;
     private int numberOfVisibleCharacters = 35;
+	private Color NURed = new Color(204.0f, 0.0f, 0.0f);
 
     // Use this for initialization
     void Start () {
@@ -45,7 +47,8 @@ public class UsersOpportunities : MonoBehaviour {
         newText.anchor = TextAnchor.UpperLeft;
         newText.characterSize = .025f;
         newText.fontSize = 200 - titleLength;
-        newText.color = Color.black;
+		newText.color = NURed;
+		//newText.font = font; This is broken at the moment, its causing a ton of problems
         
         newActivity.transform.position = Camera.main.ViewportToWorldPoint(new Vector3(0f, 1f - (StaticFeatures.staticFeatures.getTaskbarFractionOfScreen() / 100f + activityNumber * fractionOfScreenPerActivity), 10));
         newActivity.GetComponent<MeshRenderer>().sortingOrder = 4;

@@ -199,16 +199,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c08d51b8c660834ca626ef6fa5737fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  backgroundImage: {fileID: 21300000, guid: 8eb416c811d241549a49351cddef8ef1, type: 3}
-  activityFeedIcon: {fileID: 21300000, guid: 7b7a1f8f6197c0446a767400416a58d6, type: 3}
-  currentActivitiesIcon: {fileID: 21300000, guid: 69694095b65b96346b809053837c3161,
+  backgroundImage: {fileID: 21300000, guid: 9cebde3aa1ef04c699588a6c5ba37053, type: 3}
+  activityFeedIcon: {fileID: 21300000, guid: bdc2e50e641e2486480868db258bc930, type: 3}
+  currentActivitiesIcon: {fileID: 21300000, guid: 239add0b16ca04e8c863d75a14f7256b,
     type: 3}
-  settingsIcon: {fileID: 21300000, guid: e8a88f199ec3afb44a7c00c0cda53b8d, type: 3}
-  profileIcon: {fileID: 21300000, guid: 29ae84105af85ce42adb71a213602c56, type: 3}
-  taskbar: {fileID: 21300000, guid: aff5c62149ac3334384afa3d62a2bc62, type: 3}
+  settingsIcon: {fileID: 21300000, guid: 71b78582029854c39a089559fcde626a, type: 3}
+  profileIcon: {fileID: 21300000, guid: d5f0c1fe7da2543e685ad6a3a30cf702, type: 3}
+  taskbar: {fileID: 21300000, guid: 0c2258e02faa24163887200f7097ff3b, type: 3}
   currentScreenText: Settings
   numberOfButtons: 4
   taskbarFractionOfScreen: 10
+  font: {fileID: 12800000, guid: 39c3d5648da8c4e248c24456ee09df37, type: 3}
 --- !u!4 &1202524500
 Transform:
   m_ObjectHideFlags: 0
