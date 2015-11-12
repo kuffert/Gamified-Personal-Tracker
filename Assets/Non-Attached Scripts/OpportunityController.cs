@@ -35,8 +35,31 @@ public class OpportunityController: MonoBehaviour {
 		Debug.Log(activities.Count);
 		return activities;
 	}
-	
-	private static Opportunity mapOpportunity(JSONNode node)
+
+    public static GameObject generateOpportunity(int opportunityNumber, Opportunity opportunity, int numberOfVisibleCharacters, float fractionOfScreenPerOpportunity)
+    {
+        GameObject newOpportunity = new GameObject();
+
+        newOpportunity.AddComponent<TextMesh>();
+        TextMesh newText = newOpportunity.GetComponent<TextMesh>();
+        int titleLength = opportunity.Title.Length;
+        Debug.Log(titleLength);
+        newText.text = titleLength < numberOfVisibleCharacters ? opportunity.Title : opportunity.Title.Substring(0, (titleLength < numberOfVisibleCharacters ? titleLength : numberOfVisibleCharacters)) + "...";
+        newText.anchor = TextAnchor.UpperLeft;
+        newText.characterSize = .025f;
+        newText.fontSize = 200 - titleLength;
+        newText.color = Color.red;
+
+        newOpportunity.transform.position = Camera.main.ViewportToWorldPoint(new Vector3(0f, 1f - (StaticFeatures.staticFeatures.getTaskbarFractionOfScreen() / 100f + opportunityNumber * fractionOfScreenPerOpportunity), 10));
+        newOpportunity.GetComponent<MeshRenderer>().sortingOrder = 4;
+
+        newOpportunity.AddComponent<BoxCollider>();
+        newOpportunity.GetComponent<BoxCollider>().size = new Vector3(StaticFeatures.staticFeatures.getOrthographicScreenWidth(), StaticFeatures.staticFeatures.getOrthographicScreenHeight() * fractionOfScreenPerOpportunity, 0);
+        newOpportunity.GetComponent<BoxCollider>().center = new Vector3(StaticFeatures.staticFeatures.getOrthographicScreenWidth() * .5f, newOpportunity.GetComponent<BoxCollider>().size.y / -2f, 0f);
+        return newOpportunity;
+    }
+
+    private static Opportunity mapOpportunity(JSONNode node)
 	{
 		Opportunity opportunity = new Opportunity();
 

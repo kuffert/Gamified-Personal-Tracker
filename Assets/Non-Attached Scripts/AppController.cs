@@ -27,7 +27,9 @@ public class AppController : MonoBehaviour {
 	int PPEexp;
 	int WBexp;
 
-	List<Opportunity> currentOpportunities;
+	List<Opportunity> allOpportunities;
+    List<Opportunity> usersSelectedOpportunities;
+    List<Opportunity> usersCompletedOpportunities;
 
     string getUsername() { return username; }
     string getMajor() { return major; }
@@ -42,7 +44,9 @@ public class AppController : MonoBehaviour {
     int getSCExp() { return SCexp; }
     int getPPEExp() { return PPEexp; }
     int getWBexp() { return WBexp; }
-    public List<Opportunity> getCurrentOpportunities() { return currentOpportunities; }
+    public List<Opportunity> getAllOpportunities() { return allOpportunities; }
+    public List<Opportunity> getUsersSelectedOpportunities() { return usersSelectedOpportunities; }
+    public List<Opportunity> getUsersCompletedOpportunities() { return usersCompletedOpportunities; }
 
     void setUsername(string username) { this.username = username; }
     void setMajor(string major) { this.major = major; }
@@ -57,11 +61,12 @@ public class AppController : MonoBehaviour {
     void setSCExp(int exp) { this.SCexp = exp; }
     void setPPEExp(int exp) { this.PPEexp = exp; }
     void setWBExp(int exp) { this.WBexp = exp; }
-    public void setCurrentOpportunities(List<Opportunity> currentOpportunities) { this.currentOpportunities = currentOpportunities; }
+    public void setAllOpportunities(List<Opportunity> allOpportunities) { this.allOpportunities = allOpportunities; }
+    public void setUsersSelectedOpportunities(List<Opportunity> usersSelectedOpportunities) { this.usersSelectedOpportunities = usersSelectedOpportunities; }
+    public void setUsersCompletedOpportunities(List<Opportunity> usersCompletedOpportunities) { this.usersCompletedOpportunities = usersCompletedOpportunities; }
 
     void Awake () {
 			appController = this;
-		
 	}
 	
 	public void Save() {
@@ -102,10 +107,12 @@ public class AppController : MonoBehaviour {
 		private int PPEexp;
 		private int WBexp;
 
-		private List<Opportunity> currentOpportunities;
+		private List<Opportunity> allOpportunities;
+        private List<Opportunity> usersSelectedOpportunities;
+        private List<Opportunity> usersCompletedOpportunities;
 
-		public UserData() {
-			currentOpportunities = new List<Opportunity>();
+        public UserData() {
+			allOpportunities = new List<Opportunity>();
 		}
 
         string getUsername() { return username; }
@@ -121,7 +128,9 @@ public class AppController : MonoBehaviour {
         int getSCExp() { return SCexp; }
         int getPPEExp() { return PPEexp; }
         int getWBexp() { return WBexp; }
-        List<Opportunity> getCurrentOpportunities() { return currentOpportunities; }
+        List<Opportunity> getAllOpportunities() { return allOpportunities; }
+        List<Opportunity> getUsersSelectedOpportunities() { return usersSelectedOpportunities; }
+        List<Opportunity> getUsersCompletedOpportunities() { return usersCompletedOpportunities; }
 
         void setUsername(string username) { this.username = username; }
         void setMajor(string major) { this.major = major; }
@@ -136,7 +145,9 @@ public class AppController : MonoBehaviour {
         void setSCExp(int exp) { this.SCexp = exp; }
         void setPPEExp(int exp) { this.PPEexp = exp; }
         void setWBExp(int exp) { this.WBexp = exp; }
-        void setCurrentOpportunities(List<Opportunity> currentOpportunities) { this.currentOpportunities = currentOpportunities; }
+        void setAllOpportunities(List<Opportunity> allOpportunities) { this.allOpportunities = allOpportunities; }
+        void setUsersSelectedOpportunities(List<Opportunity> usersSelectedOpportunities) { this.usersSelectedOpportunities = usersSelectedOpportunities; }
+        void setUsersCompletedOpportunities(List<Opportunity> usersCompletedOpportunities) { this.usersCompletedOpportunities = usersCompletedOpportunities; }
 
         public void saveUserData()
         {
@@ -153,7 +164,9 @@ public class AppController : MonoBehaviour {
             setSCExp(SCexp);
             setPPEExp(PPEexp);
             setWBExp(WBexp);
-            setCurrentOpportunities(currentOpportunities);
+            setAllOpportunities(allOpportunities);
+            setUsersSelectedOpportunities(usersSelectedOpportunities);
+            setUsersCompletedOpportunities(usersCompletedOpportunities);
         }
 
         public void loadUserData()
@@ -171,7 +184,9 @@ public class AppController : MonoBehaviour {
             SCexp = getSCExp();
             PPEexp = getPPEExp();
             WBexp = getWBexp();
-            currentOpportunities = getCurrentOpportunities();
+            allOpportunities = getAllOpportunities();
+            usersSelectedOpportunities = getUsersSelectedOpportunities();
+            usersCompletedOpportunities = getUsersCompletedOpportunities();
         }
     }
 }

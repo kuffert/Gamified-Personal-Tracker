@@ -14,12 +14,17 @@ public class UsersOpportunities : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        saveUserTestData();
+        saveLocalTestData();
         AppController.appController.Load();
-        List<Opportunity> usersActivities = AppController.appController.getCurrentOpportunities();
+        List<Opportunity> usersActivities = AppController.appController.getUsersSelectedOpportunities();
 
         fractionOfScreenPerOpportunity = (1 - (2 * StaticFeatures.staticFeatures.getTaskbarFractionOfScreen() / 100f)) / amountOfDisplayedOpportunties;
-	}
+
+        for (int i = 0; i < usersActivities.Count; i++)
+        {
+            OpportunityController.generateOpportunity(i, usersActivities[i], numberOfVisibleCharacters, fractionOfScreenPerOpportunity);
+        }
+    }
 	
 	void Update () {
         // Eventually will need delegate navigation based on touch.
@@ -27,11 +32,13 @@ public class UsersOpportunities : MonoBehaviour {
 	
 
     // Saves some test data for the user's activities
-    private void saveUserTestData()
+    private void saveLocalTestData()
     {
-        List<Opportunity> testActivities = OpportunityController.getActivities();
+        List<Opportunity> testActivities = new List<Opportunity>();
+        testActivities.Add(OpportunityController.getActivities()[1]);
+        testActivities.Add(OpportunityController.getActivities()[2]);
 
-        AppController.appController.setCurrentOpportunities(testActivities);
+        AppController.appController.setUsersSelectedOpportunities(testActivities);
         AppController.appController.Save();
     }
 }
