@@ -33,7 +33,7 @@ public class OpportunityFeed : MonoBehaviour {
 	// Saves some test data for the user's activities
 	private void saveAllOpportunitiesToLocalFile()
 	{
-		List<Opportunity> testActivities = OpportunityController.getActivities();
+		List<Opportunity> testActivities = OpportunityController.getOpportunities();
 		AppController.appController.setAllOpportunities(testActivities);
 		AppController.appController.Save();
 	}

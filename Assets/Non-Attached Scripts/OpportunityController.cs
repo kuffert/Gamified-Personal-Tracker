@@ -10,30 +10,33 @@ public class OpportunityController: MonoBehaviour {
 	
 	private const string baseUrl = "https://api.mongolab.com/api/1";
 	private const string database = "softdevfall15";
-	private const string activitiesCollection = "opportunities";
+	private const string opportunityCollection = "opportunities";
+	private const string skillCollection = "skills";
 	private const string urlKeyEnd = "?apiKey=ZMZOg1DKKoow4p8XCzVGfX-k8P6szwZj";
-	private const string url = baseUrl + "/databases/" + database + "/collections/" + activitiesCollection + urlKeyEnd;
-	
-	public static List<Opportunity> getActivities()
+	private const string opportunityUrl = baseUrl + "/databases/" + database + "/collections/" + opportunityCollection + urlKeyEnd;
+	private const string skillUrl = baseUrl + "/databases/" + database + "/collections/" + skillCollection + urlKeyEnd;
+
+	// Should only be used once, on log in
+	public static List<Opportunity> getOpportunities()
 	{
-		List<Opportunity> activities = new List<Opportunity>();
+		List<Opportunity> opportunities = new List<Opportunity>();
 		
 		// Grab data
-		WWW www = new WWW(url);
+		WWW www = new WWW(opportunityUrl);
 		while (!www.isDone) {/*do nothing, does not work otherwise*/}
 		var N = JSON.Parse(www.text);
 		
-		// Fill activities
+		// Fill Opportunities
 		Opportunity temp;
 		while(N.Count > 0)
 		{
 			Debug.Log(N.Count);
 			temp = mapOpportunity(N[0]);
-			activities.Add(temp);
+			opportunities.Add(temp);
 			N.Remove(0);
 		}
-		Debug.Log(activities.Count);
-		return activities;
+		Debug.Log(opportunities.Count);
+		return opportunities;
 	}
 
     public static GameObject generateOpportunity(int opportunityNumber, Opportunity opportunity, int numberOfVisibleCharacters, float fractionOfScreenPerOpportunity)
@@ -59,6 +62,29 @@ public class OpportunityController: MonoBehaviour {
         return newOpportunity;
     }
 
+	// Should only be used once ever per user, then stored locally. Perhaps upon signup?
+	public static List<Skill> getSkills()
+	{
+		List<Skill> skills = new List<Skill>();
+		
+		// Grab data
+		WWW www = new WWW(skillUrl);
+		while (!www.isDone) {/*do nothing, does not work otherwise*/}
+		var N = JSON.Parse(www.text);
+		
+		// Fill Skills
+		Skill temp;
+		while(N.Count > 0)
+		{
+			Debug.Log(N.Count);
+			temp = mapSkill(N[0]);
+			skills.Add(temp);
+			N.Remove(0);
+		}
+		Debug.Log(skills.Count);
+		return skills;
+	}
+
     private static Opportunity mapOpportunity(JSONNode node)
 	{
 		Opportunity opportunity = new Opportunity();
@@ -66,7 +92,7 @@ public class OpportunityController: MonoBehaviour {
 		opportunity.Id = node["_id"]["$oid"];
 		opportunity.Title = node["title"];
 		opportunity.Format = node["format"];
-		//opportunity.TopicsOfInterest = convertToStringArray(node["topicsOfInterest"]);
+		opportunity.TopicsOfInterest = convertToStringArray(node["topicsOfInterest"]);
 		opportunity.Description = node["description"];
 		opportunity.StartDate = node["startDate"];
 		opportunity.EndDate = node["endDate"];
@@ -83,10 +109,21 @@ public class OpportunityController: MonoBehaviour {
 		opportunity.ContactOffice = node["contactOffice"];
 		opportunity.ContactEmail = node["contactEmail"];
 		opportunity.LearningOutcomes = convertToStringArray(node["learningOutcomes"]);
-		//opportunity.Skills = node["skills"]; needs to pull and convert Skills, then convert this JSONNode to List<Skills>
+		//opportunity.Skills = convertToSkills(node["skills"], AppController.Skills); needs to pull and convert Skills, then convert this JSONNode to List<Skills>
 		opportunity.Engagement = node["engagement"];
 
 		return opportunity;
+	}
+
+	private static Skill mapSkill(JSONNode node)
+	{
+		Skill skill = new Skill();
+		
+		skill.Id = node["_id"]["$oid"];
+		skill.SkillName = node["skill"];
+		skill.Dimensions = convertToStringArray(node["opportunities"]);
+		
+		return skill;
 	}
 
 	private static int[] convertToIntArray(JSONNode node)
@@ -97,7 +134,6 @@ public class OpportunityController: MonoBehaviour {
 		{
 			result[i] = node[i].AsInt;
 		}
-
 		return result;
 	}
 
@@ -109,7 +145,22 @@ public class OpportunityController: MonoBehaviour {
 		{
 			result[i] = node[i];
 		}
+		return result;
+	}
+
+	// takes the skills from local data to avoid creating new Skill objects for each Opportunity
+	// need to store skills, maybe on AppController?
+	private static List<Skill> convertToSkills(JSONNode node, List<Skill> skills)
+	{
+		List<Skill> result = new List<Skill>();
 		
+		for (int i = 0; i < node.Count; i++) 
+		{
+			for (int j = 0; j < skills.Count; j++) 
+			{
+				result.Add(skills.Find(item => item.Id == node[i]));
+			}
+		}
 		return result;
 	}
 }

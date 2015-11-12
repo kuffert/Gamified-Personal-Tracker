@@ -16,13 +16,13 @@ public class UsersOpportunities : MonoBehaviour {
     void Start () {
         saveLocalTestData();
         AppController.appController.Load();
-        List<Opportunity> usersActivities = AppController.appController.getUsersSelectedOpportunities();
+        List<Opportunity> usersOpportunities = AppController.appController.getUsersSelectedOpportunities();
 
         fractionOfScreenPerOpportunity = (1 - (2 * StaticFeatures.staticFeatures.getTaskbarFractionOfScreen() / 100f)) / amountOfDisplayedOpportunties;
 
-        for (int i = 0; i < usersActivities.Count; i++)
+        for (int i = 0; i < usersOpportunities.Count; i++)
         {
-            OpportunityController.generateOpportunity(i, usersActivities[i], numberOfVisibleCharacters, fractionOfScreenPerOpportunity);
+            OpportunityController.generateOpportunity(i, usersOpportunities[i], numberOfVisibleCharacters, fractionOfScreenPerOpportunity);
         }
     }
 	
@@ -34,11 +34,11 @@ public class UsersOpportunities : MonoBehaviour {
     // Saves some test data for the user's activities
     private void saveLocalTestData()
     {
-        List<Opportunity> testActivities = new List<Opportunity>();
-        testActivities.Add(OpportunityController.getActivities()[1]);
-        testActivities.Add(OpportunityController.getActivities()[2]);
+        List<Opportunity> testOpportunities = new List<Opportunity>();
+        testOpportunities.Add(OpportunityController.getOpportunities()[1]);
+        testOpportunities.Add(OpportunityController.getOpportunities()[2]);
 
-        AppController.appController.setUsersSelectedOpportunities(testActivities);
+        AppController.appController.setUsersSelectedOpportunities(testOpportunities);
         AppController.appController.Save();
     }
 }
