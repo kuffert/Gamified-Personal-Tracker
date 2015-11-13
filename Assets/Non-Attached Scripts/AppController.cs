@@ -66,7 +66,15 @@ public class AppController : MonoBehaviour {
     public void setUsersCompletedOpportunities(List<Opportunity> usersCompletedOpportunities) { this.usersCompletedOpportunities = usersCompletedOpportunities; }
 
     void Awake () {
-			appController = this;
+        if (appController == null)
+        {
+            DontDestroyOnLoad(gameObject);
+            appController = this;
+        }
+        else if (appController != this)
+        {
+            Destroy(gameObject);
+        }
 	}
 	
 	public void Save() {
