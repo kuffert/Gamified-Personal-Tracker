@@ -18,7 +18,7 @@ public class UsersOpportunities : MonoBehaviour {
         AppController.appController.Load();
         List<Opportunity> usersOpportunities = AppController.appController.getUsersSelectedOpportunities();
 
-        fractionOfScreenPerOpportunity = (1 - (2 * StaticFeatures.staticFeatures.getTaskbarFractionOfScreen() / 100f)) / amountOfDisplayedOpportunties;
+        fractionOfScreenPerOpportunity = (1 - (2 * ApplicationView.applicationView.getTaskbarFractionOfScreen() / 100f)) / amountOfDisplayedOpportunties;
 
         for (int i = 0; i < usersOpportunities.Count; i++)
         {

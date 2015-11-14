@@ -53,12 +53,12 @@ public class OpportunityController: MonoBehaviour {
         newText.fontSize = 200 - titleLength;
         newText.color = Color.red;
 
-        newOpportunity.transform.position = Camera.main.ViewportToWorldPoint(new Vector3(0f, 1f - (StaticFeatures.staticFeatures.getTaskbarFractionOfScreen() / 100f + opportunityNumber * fractionOfScreenPerOpportunity), 10));
+        newOpportunity.transform.position = Camera.main.ViewportToWorldPoint(new Vector3(0f, 1f - (ApplicationView.applicationView.getTaskbarFractionOfScreen() / 100f + opportunityNumber * fractionOfScreenPerOpportunity), 10));
         newOpportunity.GetComponent<MeshRenderer>().sortingOrder = 4;
 
         newOpportunity.AddComponent<BoxCollider>();
-        newOpportunity.GetComponent<BoxCollider>().size = new Vector3(StaticFeatures.staticFeatures.getOrthographicScreenWidth(), StaticFeatures.staticFeatures.getOrthographicScreenHeight() * fractionOfScreenPerOpportunity, 0);
-        newOpportunity.GetComponent<BoxCollider>().center = new Vector3(StaticFeatures.staticFeatures.getOrthographicScreenWidth() * .5f, newOpportunity.GetComponent<BoxCollider>().size.y / -2f, 0f);
+        newOpportunity.GetComponent<BoxCollider>().size = new Vector3(ApplicationView.applicationView.getOrthographicScreenWidth(), ApplicationView.applicationView.getOrthographicScreenHeight() * fractionOfScreenPerOpportunity, 0);
+        newOpportunity.GetComponent<BoxCollider>().center = new Vector3(ApplicationView.applicationView.getOrthographicScreenWidth() * .5f, newOpportunity.GetComponent<BoxCollider>().size.y / -2f, 0f);
         return newOpportunity;
     }
 

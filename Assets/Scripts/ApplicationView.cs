@@ -3,9 +3,9 @@ using System.Collections;
 
 // Author: Chris Kuffert
 // Date: 11/1/2015
-public class StaticFeatures : MonoBehaviour {
+public class ApplicationView : MonoBehaviour {
 
-    public static StaticFeatures staticFeatures;
+    public static ApplicationView applicationView;
 
     public Sprite backgroundImage;
     public Sprite opportunityFeedIcon;
@@ -40,7 +40,7 @@ public class StaticFeatures : MonoBehaviour {
 
     void Awake()
     {
-        staticFeatures = this;
+        applicationView = this;
     }
 
     // Anything in here will be run, created, instantiated, etc. immediately as the application starts.
