@@ -29,7 +29,6 @@ public class UsersOpportunities : MonoBehaviour {
 	void Update () {
         // Eventually will need delegate navigation based on touch.
 	}
-	
 
     // Saves some test data for the user's activities
     private void saveLocalTestData()
