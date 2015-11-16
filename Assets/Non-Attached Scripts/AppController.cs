@@ -96,6 +96,7 @@ public class AppController : MonoBehaviour {
 		}
 	}
 	
+    // Class that contains the same data as AppController. Allows saving to DB without interfering with Monobehaviour.
 	[Serializable]
 	class UserData {
 
