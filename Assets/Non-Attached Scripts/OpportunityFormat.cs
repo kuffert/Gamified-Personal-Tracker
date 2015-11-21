@@ -8,6 +8,7 @@ public enum OpportunityFormat
 {
 	[Description("Special Topics Discussion")]
 	SpecialTopicsDiscussion,
+	// EventEnum instead of Event
 	[Description("Event")]
 	EventEnum,
 	[Description("Alternative Spring Break")]
