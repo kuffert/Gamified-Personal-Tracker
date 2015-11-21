@@ -46,7 +46,6 @@ public class OpportunityController: MonoBehaviour {
         newOpportunity.AddComponent<TextMesh>();
         TextMesh newText = newOpportunity.GetComponent<TextMesh>();
         int titleLength = opportunity.Title.Length;
-        Debug.Log(titleLength);
         newText.text = titleLength < numberOfVisibleCharacters ? opportunity.Title : opportunity.Title.Substring(0, (titleLength < numberOfVisibleCharacters ? titleLength : numberOfVisibleCharacters)) + "...";
         newText.anchor = TextAnchor.UpperLeft;
         newText.characterSize = .025f;

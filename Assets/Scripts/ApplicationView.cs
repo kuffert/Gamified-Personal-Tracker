@@ -195,32 +195,29 @@ public class ApplicationView : MonoBehaviour {
     // Handles touching of each button:
     private void delegateNavigationFromTouch()
     {
-        foreach (Touch touch in Input.touches)
+        if (Input.GetMouseButtonDown(0))
         {
-            if (touch.phase == TouchPhase.Began)
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+
+            if (profileButton.GetComponent<Collider>().Raycast(ray, out hit, 100.0F))
             {
-                Ray ray = Camera.main.ScreenPointToRay(touch.position);
-                RaycastHit hit;
+                Application.LoadLevel("Profile");
+            }
 
-                if (profileButton.GetComponent<Collider>().Raycast(ray, out hit, 100.0F))
-                {
-                    Application.LoadLevel("Profile");
-                }
+            if (opportunityFeedButton.GetComponent<Collider>().Raycast(ray, out hit, 100.0F))
+            {
+                Application.LoadLevel("GeneralOpportunityFeed");
+            }
 
-                if (opportunityFeedButton.GetComponent<Collider>().Raycast(ray, out hit, 100.0F))
-                {
-                    Application.LoadLevel("GeneralOpportunityFeed");
-                }
+            if (yourOpportunitiesButton.GetComponent<Collider>().Raycast(ray, out hit, 100.0F))
+            {
+                Application.LoadLevel("UsersOpportunities");
+            }
 
-                if (yourOpportunitiesButton.GetComponent<Collider>().Raycast(ray, out hit, 100.0F))
-                {
-                    Application.LoadLevel("UsersOpportunities");
-                }
-
-                if (settingsButton.GetComponent<Collider>().Raycast(ray, out hit, 100.0F))
-                {
-                    Application.LoadLevel("Settings");
-                }
+            if (settingsButton.GetComponent<Collider>().Raycast(ray, out hit, 100.0F))
+            {
+                Application.LoadLevel("Settings");
             }
         }
     }
