@@ -6,12 +6,16 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Profile.unity
+    path: Assets/Scenes/Main Application Scenes/Profile.unity
   - enabled: 1
-    path: Assets/Scenes/GeneralOpportunityFeed.unity
+    path: Assets/Scenes/Main Application Scenes/GeneralOpportunityFeed.unity
   - enabled: 1
-    path: Assets/Scenes/UsersOpportunities.unity
+    path: Assets/Scenes/Main Application Scenes/UsersOpportunities.unity
   - enabled: 1
-    path: Assets/Scenes/Settings.unity
+    path: Assets/Scenes/Main Application Scenes/Settings.unity
   - enabled: 1
-    path: Assets/Scenes/Log In.unity
+    path: Assets/Scenes/Main Application Scenes/Log In.unity
+  - enabled: 1
+    path: Assets/Scenes/Opportunity Scene/UsersOpportunityInformation.unity
+  - enabled: 1
+    path: Assets/Scenes/Opportunity Scene/OpportunityInformation.unity
