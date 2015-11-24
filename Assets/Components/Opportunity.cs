@@ -229,4 +229,21 @@ public class Opportunity {
 			engagement = value;
 		}
 	}
+
+    // calculates the Experience values of this opportunity, right now at a weight of 1 per dimension listing
+    // Craig Hammond
+    public Experience EXP()
+    {
+        Experience exp = Experience.DefaultExperience();
+
+        foreach (Skill skill in skills)
+        {
+            foreach(string dimension in skill.Dimensions)
+            {
+                exp.add(dimension, 1);
+            }
+        }
+
+        return exp;
+    }
 }
