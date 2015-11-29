@@ -172,4 +172,17 @@ public class OpportunityController: MonoBehaviour {
         }
         opportunityGameObjects.Clear();
     }
+
+    // Checks if a list of opportunities contains an opportunity with the given id
+    public static bool containsOpportunityId(List<Opportunity> oppList, string id)
+    {
+        foreach (Opportunity opp in oppList)
+        {
+            if (opp.Id.Equals(id))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 }

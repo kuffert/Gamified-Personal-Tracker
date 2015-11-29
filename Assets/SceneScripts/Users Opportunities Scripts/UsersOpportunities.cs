@@ -8,8 +8,7 @@ public class UsersOpportunities : OpportunityController {
 
     void Start () {
         wipeAllOpportunityGameObjects();
-        saveLocalTestData(); //TODO: REMOVE THIS ONE WE GET OPPORTUNITY SIGN UPS WORKING
-        AppController.appController.Load(); //TODO: REMOVE THIS ONE WE GET OPPORTUNITY SIGN UPS WORKING
+        AppController.appController.Load();
         List<Opportunity> usersOpportunities = AppController.appController.getUsersSelectedOpportunities();
 
         float fractionOfScreenPerOpportunity = (1 - (2 * ApplicationView.applicationView.getTaskbarFractionOfScreen() / 100f)) / numberOfDisplayedOpportunities;
@@ -47,18 +46,4 @@ public class UsersOpportunities : OpportunityController {
             }
         }
     }
-
-    
-    // Saves some test data for the user's activities
-    //TODO: REMOVE THIS ONE WE GET OPPORTUNITY SIGN UPS WORKING
-    private void saveLocalTestData()
-    {
-        List<Opportunity> testOpportunities = new List<Opportunity>();
-        testOpportunities.Add(OpportunityController.getOpportunities()[1]);
-        testOpportunities.Add(OpportunityController.getOpportunities()[2]);
-
-        AppController.appController.setUsersSelectedOpportunities(testOpportunities);
-        AppController.appController.Save();
-    }
-
 }

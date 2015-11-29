@@ -27,8 +27,8 @@ public class OpportunityFeed : OpportunityController {
 	// Saves some test data for the user's activities
 	private void saveAllOpportunitiesToLocalFile()
 	{
-		List<Opportunity> testActivities = getOpportunities();
-		AppController.appController.setAllOpportunities(testActivities);
+		List<Opportunity> dbOpportunties = getOpportunities();
+		AppController.appController.setAllOpportunities(dbOpportunties);
 		AppController.appController.Save();
 	}
 

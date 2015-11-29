@@ -70,6 +70,14 @@ public class AppController : MonoBehaviour {
         if (appController == null)
         {
             DontDestroyOnLoad(gameObject);
+            setAllOpportunities(new List<Opportunity>());
+            setUsersSelectedOpportunities(new List<Opportunity>());
+            setUsersCompletedOpportunities(new List<Opportunity>());
+            setIAExp(0);
+            setGAExp(0);
+            setSCExp(0);
+            setPPEExp(0);
+            setWBExp(0);
             appController = this;
         }
         else if (appController != this)
