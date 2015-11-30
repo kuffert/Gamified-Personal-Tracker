@@ -1,8 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
-
+using System;
 // Author: Chris Kuffert
 // Date: 11/8/2015
+
+[Serializable]
 public class Opportunity {
 
 	private string id;
