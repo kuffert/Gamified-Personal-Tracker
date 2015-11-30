@@ -10,6 +10,9 @@ public class Skill {
 	
 	public Skill()
 	{
+        this.id = string.Empty;
+        this.skillName = string.Empty;
+        this.dimensions = new string[0];
 	}
 
 	public string Id {

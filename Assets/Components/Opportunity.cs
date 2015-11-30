@@ -30,6 +30,28 @@ public class Opportunity {
 
     public Opportunity()
     {
+        this.id = string.Empty;
+        this.title = string.Empty;
+        this.format = string.Empty;
+        this.topicsOfInterest = new string[0];
+        this.description = string.Empty;
+        this.startDate = string.Empty;
+        this.endDate = string.Empty;
+        this.joinAnytime = false;
+        this.lengthOfEngagement = 0;
+        this.location = string.Empty;
+        this.recurrence = new string[0];
+        this.coop = false;
+        this.academicStanding = new int[0];
+        this.major = string.Empty;
+        this.resident = false;
+        this.sponsor = string.Empty;
+        this.contactName = string.Empty;
+        this.contactOffice = string.Empty;
+        this.contactEmail = string.Empty;
+        this.learningOutcomes = new string[0];
+        this.skills = new List<Skill>();
+        this.engagement = string.Empty;
     }
 
 	public string Id {
@@ -236,7 +258,7 @@ public class Opportunity {
     {
         Experience exp = Experience.DefaultExperience();
 
-        foreach (Skill skill in skills)
+        foreach (Skill skill in this.skills)
         {
             foreach(string dimension in skill.Dimensions)
             {
