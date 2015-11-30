@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
@@ -32,8 +31,8 @@ public class AppController : MonoBehaviour {
     int opportunityFeedPageNumber;
     int usersOpportunitiesPageNumber;
 
-    string getUsername() { return username; }
-    string getMajor() { return major; }
+    public string getUsername() { return username; }
+    public string getMajor() { return major; }
     public int getYear() { return year; }
     public int getIAExp() { return IAexp; }
     public int getGAExp() { return GAexp; }
@@ -49,9 +48,9 @@ public class AppController : MonoBehaviour {
     public int getOpportunityFeedPageNumber() { return opportunityFeedPageNumber; }
     public int getUsersOpportunitiesPageNumber() { return usersOpportunitiesPageNumber; }
     
-    void setUsername(string username) { this.username = username; }
-    void setMajor(string major) { this.major = major; }
-    void setYear(int year) { this.year = year; }
+    public void setUsername(string username) { this.username = username; }
+    public void setMajor(string major) { this.major = major; }
+    public void setYear(int year) { this.year = year; }
     public void setIAExp(int exp) { this.IAexp = exp; }
     public void setGAExp(int exp) { this.GAexp = exp; }
     public void setSCExp(int exp) { this.SCexp = exp; }
@@ -87,25 +86,28 @@ public class AppController : MonoBehaviour {
 	}
 	
 	public void Save() {
+        Debug.Log("save called");
 		BinaryFormatter bf = new BinaryFormatter ();
 		FileStream file = File.Create (Application.persistentDataPath + "/userData.dat");
 		UserData data = new UserData ();
-        data.saveUserData();
+        data.saveUserData(this);
 		bf.Serialize (file, data);
 		file.Close();
 	}
 
 	public void Load() {
-		if (File.Exists (Application.persistentDataPath + "userData.dat")) {
-			BinaryFormatter bf = new BinaryFormatter();
+        Debug.Log("load called");
+        if (File.Exists (Application.persistentDataPath + "/userData.dat")) {
+            Debug.Log("file found");
+            BinaryFormatter bf = new BinaryFormatter();
             FileStream file = File.Open(Application.persistentDataPath + "/userData.dat", FileMode.Open);
 			UserData data = (UserData)bf.Deserialize(file);
 			file.Close();
-            data.loadUserData();
+            data.loadUserData(this);
 		}
 	}
 	
-    // Class that contains the same data as AppController. Allows saving to DB without interfering with Monobehaviour.
+    // Class that contains the same data as AppController. Allows saving locally without interfering with Monobehaviour.
 	[Serializable]
 	class UserData {
 
@@ -168,44 +170,44 @@ public class AppController : MonoBehaviour {
         public void setOpportunityFeedPageNumber(int opportunityFeedPageNumber) { this.opportunityFeedPageNumber = opportunityFeedPageNumber; }
         public void setUsersOpportunitiesPageNumber(int usersOpportunitiesPageNumber) { this.usersOpportunitiesPageNumber = usersOpportunitiesPageNumber; }
 
-        public void saveUserData()
+        public void saveUserData(AppController appController)
         {
-            setUsername(username);
-            setMajor(major);
-            setYear(year);
-            setIAExp(IAexp);
-            setGAExp(GAexp);
-            setSCExp(SCexp);
-            setPPEExp(PPEexp);
-            setWBExp(WBexp);
-            setAllOpportunities(allOpportunities);
-            setUsersSelectedOpportunities(usersSelectedOpportunities);
-            setUsersCompletedOpportunities(usersCompletedOpportunities);
-            setOpportunityIndex(opportunityIndex);
-            setUsersSelectedOpportunityIndex(usersSelectedOpportunityIndex);
-            setUsersCompletedOpportunityIndex(usersCompletedOpportunityIndex);
-            setOpportunityFeedPageNumber(opportunityFeedPageNumber);
-            setUsersOpportunitiesPageNumber(usersOpportunitiesPageNumber);
+            setUsername(appController.getUsername());
+            setMajor(appController.getMajor());
+            setYear(appController.getYear());
+            setIAExp(appController.getIAExp());
+            setGAExp(appController.getGAExp());
+            setSCExp(appController.getSCExp());
+            setPPEExp(appController.getPPEExp());
+            setWBExp(appController.getWBExp());
+            setAllOpportunities(appController.getAllOpportunities());
+            setUsersSelectedOpportunities(appController.getUsersSelectedOpportunities());
+            setUsersCompletedOpportunities(appController.getUsersCompletedOpportunities());
+            setOpportunityIndex(appController.getOpportunityFeedIndex());
+            setUsersSelectedOpportunityIndex(appController.getUsersSelectedOpportunityIndex());
+            setUsersCompletedOpportunityIndex(appController.getUsersCompletedOpportunityIndex());
+            setOpportunityFeedPageNumber(appController.getOpportunityFeedPageNumber());
+            setUsersOpportunitiesPageNumber(appController.getUsersOpportunitiesPageNumber());
         }
 
-        public void loadUserData()
+        public void loadUserData(AppController appController)
         {
-            username = getUsername();
-            major = getMajor();
-            year = getYear();
-            IAexp = getIAExp();
-            GAexp = getGAExp();
-            SCexp = getSCExp();
-            PPEexp = getPPEExp();
-            WBexp = getWBexp();
-            allOpportunities = getAllOpportunities();
-            usersSelectedOpportunities = getUsersSelectedOpportunities();
-            usersCompletedOpportunities = getUsersCompletedOpportunities();
-            opportunityIndex = getOpportunityIndex();
-            usersSelectedOpportunityIndex = getUsersSelectedOpportunityIndex();
-            usersCompletedOpportunityIndex = getUsersCompletedOpportunityIndex();
-            opportunityFeedPageNumber = getOpportunityFeedPageNumber();
-            usersOpportunitiesPageNumber = getUsersOpportunitiesPageNumber();
+            appController.setUsername(getUsername());
+            appController.setMajor(getMajor());
+            appController.setYear(getYear());
+            appController.setIAExp(getIAExp());
+            appController.setGAExp(getGAExp());
+            appController.setSCExp(getSCExp());
+            appController.setPPEExp(getPPEExp());
+            appController.setWBExp(getWBexp());
+            appController.setAllOpportunities(getAllOpportunities());
+            appController.setUsersSelectedOpportunities(getUsersSelectedOpportunities());
+            appController.setUsersCompletedOpportunities(getUsersCompletedOpportunities());
+            appController.setOpportunityFeedIndex(getOpportunityIndex());
+            appController.setUsersSelectedOpportunityIndex(getUsersSelectedOpportunityIndex());
+            appController.setUsersCompletedOpportunityIndex(getUsersCompletedOpportunityIndex());
+            appController.setOpportunityFeedPageNumber(getOpportunityFeedPageNumber());
+            appController.setUsersOpportunitiesPageNumber(getUsersOpportunitiesPageNumber());
         }
     }
 }
