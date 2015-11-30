@@ -46,6 +46,8 @@ public class UsersOpportunityInformation : UsersOpportunities {
             if (completeText.GetComponent<Collider>().Raycast(ray, out hit, 100.0F))
             {
                 // @Yvette or @Craig, add the level up code here!
+                // Added -Craig
+                AddExp();
 
                 List<Opportunity> completedOppList = AppController.appController.getUsersCompletedOpportunities();
                 completedOppList.Add(opportunity);
@@ -67,4 +69,30 @@ public class UsersOpportunityInformation : UsersOpportunities {
             }
         }
     }
+
+    private void AddExp()
+    {
+        Experience toAdd = this.opportunity.EXP();
+
+        int add = 0;
+
+        toAdd.totals.TryGetValue("Intellectual Agility", out add);
+        AppController.appController.setIAExp(AppController.appController.getIAExp() + add);
+
+        toAdd.totals.TryGetValue("Global Awareness", out add);
+        AppController.appController.setIAExp(AppController.appController.getGAExp() + add);
+
+        toAdd.totals.TryGetValue("Social Conciousness", out add);
+        AppController.appController.setIAExp(AppController.appController.getSCExp() + add);
+
+        toAdd.totals.TryGetValue("Personal Professional Experience", out add);
+        AppController.appController.setIAExp(AppController.appController.getPPEExp() + add);
+
+        toAdd.totals.TryGetValue("Well Being", out add);
+        AppController.appController.setIAExp(AppController.appController.getWBExp() + add);
+
+        AppController.appController.Save();
+
+    }
+
 }

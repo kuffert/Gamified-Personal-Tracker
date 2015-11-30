@@ -34,12 +34,12 @@ public class AppController : MonoBehaviour {
 
     string getUsername() { return username; }
     string getMajor() { return major; }
-    int getYear() { return year; }
-    int getIAExp() { return IAexp; }
-    int getGAExp() { return GAexp; }
-    int getSCExp() { return SCexp; }
-    int getPPEExp() { return PPEexp; }
-    int getWBexp() { return WBexp; }
+    public int getYear() { return year; }
+    public int getIAExp() { return IAexp; }
+    public int getGAExp() { return GAexp; }
+    public int getSCExp() { return SCexp; }
+    public int getPPEExp() { return PPEexp; }
+    public int getWBExp() { return WBexp; }
     public List<Opportunity> getAllOpportunities() { return allOpportunities; }
     public List<Opportunity> getUsersSelectedOpportunities() { return usersSelectedOpportunities; }
     public List<Opportunity> getUsersCompletedOpportunities() { return usersCompletedOpportunities; }
@@ -52,11 +52,11 @@ public class AppController : MonoBehaviour {
     void setUsername(string username) { this.username = username; }
     void setMajor(string major) { this.major = major; }
     void setYear(int year) { this.year = year; }
-    void setIAExp(int exp) { this.IAexp = exp; }
-    void setGAExp(int exp) { this.GAexp = exp; }
-    void setSCExp(int exp) { this.SCexp = exp; }
-    void setPPEExp(int exp) { this.PPEexp = exp; }
-    void setWBExp(int exp) { this.WBexp = exp; }
+    public void setIAExp(int exp) { this.IAexp = exp; }
+    public void setGAExp(int exp) { this.GAexp = exp; }
+    public void setSCExp(int exp) { this.SCexp = exp; }
+    public void setPPEExp(int exp) { this.PPEexp = exp; }
+    public void setWBExp(int exp) { this.WBexp = exp; }
     public void setAllOpportunities(List<Opportunity> allOpportunities) { this.allOpportunities = allOpportunities; }
     public void setUsersSelectedOpportunities(List<Opportunity> usersSelectedOpportunities) { this.usersSelectedOpportunities = usersSelectedOpportunities; }
     public void setUsersCompletedOpportunities(List<Opportunity> usersCompletedOpportunities) { this.usersCompletedOpportunities = usersCompletedOpportunities; }
