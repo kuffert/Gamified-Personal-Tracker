@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using SimpleJSON;
+using System.Linq;
 
 // Author: Yvette Kim
 // Date: 11/11/2015
@@ -15,6 +16,7 @@ public class OpportunityController: MonoBehaviour {
 	private const string skillUrl = baseUrl + "/databases/" + database + "/collections/" + skillCollection + urlKeyEnd;
     
     public int numberOfDisplayedOpportunities;
+    public static List<Skill> allSkills;
     protected int numberOfVisibleCharacters = 35;
     protected List<GameObject> opportunityGameObjects = new List<GameObject>();
 
@@ -39,7 +41,6 @@ public class OpportunityController: MonoBehaviour {
 		return opportunities;
 	}
 
-	// Should only be used once ever per user, then stored locally. Perhaps upon signup?
 	public static List<Skill> getSkills()
 	{
 		List<Skill> skills = new List<Skill>();
@@ -71,22 +72,22 @@ public class OpportunityController: MonoBehaviour {
 		opportunity.Format = node["format"];
 		opportunity.TopicsOfInterest = convertToStringArray(node["topicsOfInterest"]);
 		opportunity.Description = node["description"];
-		opportunity.StartDate = node["startDate"];
-		opportunity.EndDate = node["endDate"];
+		opportunity.StartDate = node["begin_date"];
+		opportunity.EndDate = node["end_date"];
 		opportunity.JoinAnytime = node["joinAnytime"].AsBool;
-		opportunity.LengthOfEngagement = node["lengthOfEngagement"].AsInt;
+		opportunity.LengthOfEngagement = node["length"].AsInt;
 		opportunity.Location = node["location"];
 		opportunity.Recurrence = convertToStringArray(node["recurrence"]);
-		opportunity.Coop = node["coop"].AsBool;
-		opportunity.AcademicStanding = convertToIntArray(node["academicStanding"]);
+		opportunity.Coop = node["co-op"].AsBool;
+		opportunity.AcademicStanding = convertToIntArray(node["academic_standing"]);
 		opportunity.Major = node["major"];
 		opportunity.Resident = node["resident"].AsBool;
 		opportunity.Sponsor = node["sponsor"];
-		opportunity.ContactName = node["contactName"];
-		opportunity.ContactOffice = node["contactOffice"];
-		opportunity.ContactEmail = node["contactEmail"];
-		opportunity.LearningOutcomes = convertToStringArray(node["learningOutcomes"]);
-		//opportunity.Skills = convertToSkills(node["skills"], AppController.Skills); needs to pull and convert Skills, then convert this JSONNode to List<Skills>
+		opportunity.ContactName = node["contact_name"];
+		opportunity.ContactOffice = node["contact_office"];
+		opportunity.ContactEmail = node["contact_email"];
+		opportunity.LearningOutcomes = convertToStringArray(node["learning_outcomes"]);
+		opportunity.Skills = convertToSkills(convertToStringArray(node["skills"]));
 		opportunity.Engagement = node["engagement"];
 
 		return opportunity;
@@ -120,24 +121,21 @@ public class OpportunityController: MonoBehaviour {
 		
 		for (int i = 0; i < node.Count; i++) 
 		{
-			result[i] = node[i];
+			result[i] = node[1];
 		}
 		return result;
 	}
 
-	// takes the skills from local data to avoid creating new Skill objects for each Opportunity
-	// need to store skills, maybe on AppController?
-	private static List<Skill> convertToSkills(JSONNode node, List<Skill> skills)
+	// I have NO IDEA Why this isn't working.
+    // the for loop will remove? Skills from the static allSkills field.
+	private static List<Skill> convertToSkills(string[] ids)
 	{
-		List<Skill> result = new List<Skill>();
+        List<Skill> result = new List<Skill>();
 		
-		for (int i = 0; i < node.Count; i++) 
+		for (int p = 0; p < ids.Length; p++) 
 		{
-			for (int j = 0; j < skills.Count; j++) 
-			{
-				result.Add(skills.Find(item => item.Id == node[i]));
-			}
-		}
+            //result.Add(allSkills.First(item => item.Id == ids[p]));
+   		}
 		return result;
 	}
 
@@ -150,6 +148,8 @@ public class OpportunityController: MonoBehaviour {
         TextMesh newText = newOpportunity.GetComponent<TextMesh>();
         int titleLength = opportunity.Title.Length;
         newText.text = titleLength < numberOfVisibleCharacters ? opportunity.Title : opportunity.Title.Substring(0, (titleLength < numberOfVisibleCharacters ? titleLength : numberOfVisibleCharacters)) + "...";
+        // How I was superficially checking the ConvertToSkills() bug
+        //newText.text = titleLength < numberOfVisibleCharacters ? OpportunityController.getAllSkills().First().Id : opportunity.Title.Substring(0, (titleLength < numberOfVisibleCharacters ? titleLength : numberOfVisibleCharacters)) + "...";
         newText.anchor = TextAnchor.UpperLeft;
         newText.characterSize = .025f;
         newText.fontSize = 200 - titleLength;
@@ -185,4 +185,8 @@ public class OpportunityController: MonoBehaviour {
         }
         return false;
     }
+
+    public static List<Skill> getAllSkills() { return allSkills; }
+    // Default to getting from DB.
+    public static void setAllSkills() { OpportunityController.allSkills = OpportunityController.getSkills(); }
 }

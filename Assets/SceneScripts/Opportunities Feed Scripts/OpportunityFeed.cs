@@ -10,6 +10,7 @@ public class OpportunityFeed : OpportunityController {
         wipeAllOpportunityGameObjects();
 		saveAllOpportunitiesToLocalFile();
 		AppController.appController.Load();
+        setAllSkills();
 		List<Opportunity> usersOpportunities = AppController.appController.getAllOpportunities();
 		
 		float fractionOfScreenPerOpportunity = (1 - (2 * ApplicationView.applicationView.getTaskbarFractionOfScreen() / 100f)) / numberOfDisplayedOpportunities;
