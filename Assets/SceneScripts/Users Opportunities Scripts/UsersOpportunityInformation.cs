@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections.Generic;
 
 // Author: Chris Kuffert
@@ -86,7 +86,7 @@ public class UsersOpportunityInformation : UsersOpportunities {
         AppController.appController.setIAExp(AppController.appController.getSCExp() + add);
 
         toAdd.totals.TryGetValue("Personal Professional Experience", out add);
-        AppController.appController.setIAExp(AppController.appController.getPPEExp() + add);
+        AppController.appController.setIAExp(AppController.appController.getPPExp() + add);
 
         toAdd.totals.TryGetValue("Well Being", out add);
         AppController.appController.setIAExp(AppController.appController.getWBExp() + add);

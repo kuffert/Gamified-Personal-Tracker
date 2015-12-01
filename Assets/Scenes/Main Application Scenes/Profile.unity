@@ -85,6 +85,55 @@ NavMeshSettings:
     cellSize: .166666672
     manualCellSize: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &89241580
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 89241581}
+  - 114: {fileID: 89241582}
+  m_Layer: 0
+  m_Name: Profile
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &89241581
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 89241580}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: .0953593254, y: .53229785, z: -.292181015}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+--- !u!114 &89241582
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 89241580}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea95c0eedeee64549a911ad81a4821f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IAButtonSprite: {fileID: 21300000, guid: 6ebc75c1c3e2d425b972f11f813d67ea, type: 3}
+  GAButtonSprite: {fileID: 21300000, guid: 41040a7add7044c50966547477aa505b, type: 3}
+  SCButtonSprite: {fileID: 21300000, guid: 4dd2958a12c04417cb46cda5dc8d650e, type: 3}
+  PPButtonSprite: {fileID: 21300000, guid: 010feb90b6109432281c47504be54bf8, type: 3}
+  WBButtonSprite: {fileID: 21300000, guid: 3ab72e8f805b54f598199f0aaf1405db, type: 3}
+  IABubbleSprite: {fileID: 21300000, guid: 967c2863df5634e2993d65b799eb1bc3, type: 3}
+  GABubbleSprite: {fileID: 21300000, guid: 91d7a2ad93fb647d8922412ba0175100, type: 3}
+  SCBubbleSprite: {fileID: 21300000, guid: 0155a24c095e34e0ca499284a712366d, type: 3}
+  PPBubbleSprite: {fileID: 21300000, guid: 77ef126e109ab4b2cadb615619c52370, type: 3}
+  WBBubbleSprite: {fileID: 21300000, guid: b5ab07bdb71e144de805227f950a8ea1, type: 3}
 --- !u!1 &575471274
 GameObject:
   m_ObjectHideFlags: 0
@@ -237,7 +286,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &1427176674
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -256,9 +305,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_MinimumChartSize: 4
   m_AutoUVMaxDistance: .5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}

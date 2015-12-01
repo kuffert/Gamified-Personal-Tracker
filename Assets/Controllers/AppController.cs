@@ -14,11 +14,11 @@ public class AppController : MonoBehaviour {
 	string major;
 	int year;
 
-	int IAexp;
-	int GAexp;
-	int SCexp;
-	int PPEexp;
-	int WBexp;
+	int IAExp;
+	int GAExp;
+	int SCExp;
+	int PPExp;
+	int WBExp;
 
 	List<Opportunity> allOpportunities;
     List<Opportunity> usersSelectedOpportunities;
@@ -34,11 +34,11 @@ public class AppController : MonoBehaviour {
     public string getUsername() { return username; }
     public string getMajor() { return major; }
     public int getYear() { return year; }
-    public int getIAExp() { return IAexp; }
-    public int getGAExp() { return GAexp; }
-    public int getSCExp() { return SCexp; }
-    public int getPPEExp() { return PPEexp; }
-    public int getWBExp() { return WBexp; }
+    public int getIAExp() { return IAExp; }
+    public int getGAExp() { return GAExp; }
+    public int getSCExp() { return SCExp; }
+    public int getPPExp() { return PPExp; }
+    public int getWBExp() { return WBExp; }
     public List<Opportunity> getAllOpportunities() { return allOpportunities; }
     public List<Opportunity> getUsersSelectedOpportunities() { return usersSelectedOpportunities; }
     public List<Opportunity> getUsersCompletedOpportunities() { return usersCompletedOpportunities; }
@@ -51,11 +51,11 @@ public class AppController : MonoBehaviour {
     public void setUsername(string username) { this.username = username; }
     public void setMajor(string major) { this.major = major; }
     public void setYear(int year) { this.year = year; }
-    public void setIAExp(int exp) { this.IAexp = exp; }
-    public void setGAExp(int exp) { this.GAexp = exp; }
-    public void setSCExp(int exp) { this.SCexp = exp; }
-    public void setPPEExp(int exp) { this.PPEexp = exp; }
-    public void setWBExp(int exp) { this.WBexp = exp; }
+    public void setIAExp(int exp) { this.IAExp = exp; }
+    public void setGAExp(int exp) { this.GAExp = exp; }
+    public void setSCExp(int exp) { this.SCExp = exp; }
+    public void setPPExp(int exp) { this.PPExp = exp; }
+    public void setWBExp(int exp) { this.WBExp = exp; }
     public void setAllOpportunities(List<Opportunity> allOpportunities) { this.allOpportunities = allOpportunities; }
     public void setUsersSelectedOpportunities(List<Opportunity> usersSelectedOpportunities) { this.usersSelectedOpportunities = usersSelectedOpportunities; }
     public void setUsersCompletedOpportunities(List<Opportunity> usersCompletedOpportunities) { this.usersCompletedOpportunities = usersCompletedOpportunities; }
@@ -75,7 +75,7 @@ public class AppController : MonoBehaviour {
             setIAExp(0);
             setGAExp(0);
             setSCExp(0);
-            setPPEExp(0);
+            setPPExp(0);
             setWBExp(0);
             appController = this;
         }
@@ -115,11 +115,11 @@ public class AppController : MonoBehaviour {
 		private string major;
 		private int year;
 		
-		private int IAexp;
-		private int GAexp;
-		private int SCexp;
-		private int PPEexp;
-		private int WBexp;
+		private int IAExp;
+		private int GAExp;
+		private int SCExp;
+		private int PPExp;
+		private int WBExp;
 
         List<Opportunity> allOpportunities;
         List<Opportunity> usersSelectedOpportunities;
@@ -139,11 +139,11 @@ public class AppController : MonoBehaviour {
         string getUsername() { return username; }
         string getMajor() { return major; }
         int getYear() { return year; }
-        int getIAExp() { return IAexp; }
-        int getGAExp() { return GAexp; }
-        int getSCExp() { return SCexp; }
-        int getPPEExp() { return PPEexp; }
-        int getWBexp() { return WBexp; }
+        int getIAExp() { return IAExp; }
+        int getGAExp() { return GAExp; }
+        int getSCExp() { return SCExp; }
+        int getPPEExp() { return PPExp; }
+        int getWBexp() { return WBExp; }
         public List<Opportunity> getAllOpportunities() { return allOpportunities; }
         public List<Opportunity> getUsersSelectedOpportunities() { return usersSelectedOpportunities; }
         public List<Opportunity> getUsersCompletedOpportunities() { return usersCompletedOpportunities; }
@@ -156,11 +156,11 @@ public class AppController : MonoBehaviour {
         void setUsername(string username) { this.username = username; }
         void setMajor(string major) { this.major = major; }
         void setYear(int year) { this.year = year; }
-        void setIAExp(int exp) { this.IAexp = exp; }
-        void setGAExp(int exp) { this.GAexp = exp; }
-        void setSCExp(int exp) { this.SCexp = exp; }
-        void setPPEExp(int exp) { this.PPEexp = exp; }
-        void setWBExp(int exp) { this.WBexp = exp; }
+        void setIAExp(int exp) { this.IAExp = exp; }
+        void setGAExp(int exp) { this.GAExp = exp; }
+        void setSCExp(int exp) { this.SCExp = exp; }
+        void setPPEExp(int exp) { this.PPExp = exp; }
+        void setWBExp(int exp) { this.WBExp = exp; }
         void setAllOpportunities(List<Opportunity> allOpportunities) { this.allOpportunities = allOpportunities; }
         void setUsersSelectedOpportunities(List<Opportunity> usersSelectedOpportunities) { this.usersSelectedOpportunities = usersSelectedOpportunities; }
         void setUsersCompletedOpportunities(List<Opportunity> usersCompletedOpportunities) { this.usersCompletedOpportunities = usersCompletedOpportunities; }
@@ -178,7 +178,7 @@ public class AppController : MonoBehaviour {
             setIAExp(appController.getIAExp());
             setGAExp(appController.getGAExp());
             setSCExp(appController.getSCExp());
-            setPPEExp(appController.getPPEExp());
+            setPPEExp(appController.getPPExp());
             setWBExp(appController.getWBExp());
             setAllOpportunities(appController.getAllOpportunities());
             setUsersSelectedOpportunities(appController.getUsersSelectedOpportunities());
@@ -198,7 +198,7 @@ public class AppController : MonoBehaviour {
             appController.setIAExp(getIAExp());
             appController.setGAExp(getGAExp());
             appController.setSCExp(getSCExp());
-            appController.setPPEExp(getPPEExp());
+            appController.setPPExp(getPPEExp());
             appController.setWBExp(getWBexp());
             appController.setAllOpportunities(getAllOpportunities());
             appController.setUsersSelectedOpportunities(getUsersSelectedOpportunities());
