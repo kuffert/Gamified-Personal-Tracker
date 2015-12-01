@@ -38,6 +38,16 @@ public class ApplicationView : MonoBehaviour {
     public float getOrthographicScreenHeight() { return orthographicScreenHeight; }
     public float getOrthographicScreenWidth() { return orthographicScreenWidth; }
 
+    // Used for validation testing purposes
+    public GameObject getBackground() { return background; }
+    public GameObject getTopTaskbar() { return topTaskbar; }
+    public GameObject getBottomTaskBar() { return bottomTaskbar; }
+    public GameObject getProfileButton() { return profileButton; }
+    public GameObject getOpportunityFeedButton() { return opportunityFeedButton; }
+    public GameObject getYourOpportunitiesButton() { return yourOpportunitiesButton; }
+    public GameObject getSettingsButton() { return settingsButton; }
+    public GameObject getSceneText() { return sceneText; }
+
     void Awake()
     {
         applicationView = this;
@@ -127,7 +137,6 @@ public class ApplicationView : MonoBehaviour {
         return taskbar;
     }
 
-
     // Constructs an interactable dynamic element of the application.
     private GameObject generateDynamicElement(Sprite sprite)
     {
@@ -149,6 +158,23 @@ public class ApplicationView : MonoBehaviour {
         navigationButton.AddComponent<BoxCollider>();
 
         return navigationButton;
+    }
+
+    // Generates the current scenes text
+    private GameObject generateSceneText()
+    {
+        GameObject sceneText = new GameObject();
+        sceneText.AddComponent<TextMesh>();
+        TextMesh sceneTextMesh = sceneText.GetComponent<TextMesh>();
+        //sceneTextMesh.font = font; Something about this is broken, and its causing a ton of problems.
+        sceneTextMesh.text = currentScreenText;
+        sceneTextMesh.anchor = TextAnchor.MiddleCenter;
+        sceneTextMesh.characterSize = .025f;
+        sceneTextMesh.fontSize = 200;
+        // Set the text to "Northeastern Red":
+        Color NURed = new Color(204.0f, 0.0f, 0.0f);
+        sceneTextMesh.color = NURed;
+        return sceneText;
     }
 
     // Helper for dynamically scaling the buttons (x)
@@ -173,23 +199,6 @@ public class ApplicationView : MonoBehaviour {
         float yOffset = button.GetComponent<SpriteRenderer>().sprite.bounds.size.y / 2;
 
         return new Vector3(xOffset, yOffset);
-    }
-
-    // Generates the current scenes text
-    private GameObject generateSceneText()
-    {
-        GameObject sceneText = new GameObject();
-        sceneText.AddComponent<TextMesh>();
-        TextMesh sceneTextMesh = sceneText.GetComponent<TextMesh>();
-		//sceneTextMesh.font = font; Something about this is broken, and its causing a ton of problems.
-		sceneTextMesh.text = currentScreenText;
-        sceneTextMesh.anchor = TextAnchor.MiddleCenter;
-        sceneTextMesh.characterSize = .025f;
-        sceneTextMesh.fontSize = 200;
-		// Set the text to "Northeastern Red":
-		Color NURed = new Color (204.0f, 0.0f, 0.0f);
-		sceneTextMesh.color = NURed;
-        return sceneText;
     }
 
     // Handles touching of each button:

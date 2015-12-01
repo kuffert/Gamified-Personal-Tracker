@@ -86,7 +86,6 @@ public class AppController : MonoBehaviour {
 	}
 	
 	public void Save() {
-        Debug.Log("save called");
 		BinaryFormatter bf = new BinaryFormatter ();
 		FileStream file = File.Create (Application.persistentDataPath + "/userData.dat");
 		UserData data = new UserData ();
@@ -96,9 +95,7 @@ public class AppController : MonoBehaviour {
 	}
 
 	public void Load() {
-        Debug.Log("load called");
         if (File.Exists (Application.persistentDataPath + "/userData.dat")) {
-            Debug.Log("file found");
             BinaryFormatter bf = new BinaryFormatter();
             FileStream file = File.Open(Application.persistentDataPath + "/userData.dat", FileMode.Open);
 			UserData data = (UserData)bf.Deserialize(file);

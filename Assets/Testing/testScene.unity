@@ -85,6 +85,57 @@ NavMeshSettings:
     cellSize: .166666672
     manualCellSize: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &167024249
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 167024251}
+  - 114: {fileID: 167024250}
+  m_Layer: 0
+  m_Name: ApplicationView
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &167024250
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 167024249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c08d51b8c660834ca626ef6fa5737fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  backgroundImage: {fileID: 21300000, guid: 9cebde3aa1ef04c699588a6c5ba37053, type: 3}
+  opportunityFeedIcon: {fileID: 21300000, guid: bdc2e50e641e2486480868db258bc930,
+    type: 3}
+  youOpportunitiesIcon: {fileID: 21300000, guid: 239add0b16ca04e8c863d75a14f7256b,
+    type: 3}
+  settingsIcon: {fileID: 21300000, guid: 71b78582029854c39a089559fcde626a, type: 3}
+  profileIcon: {fileID: 21300000, guid: d5f0c1fe7da2543e685ad6a3a30cf702, type: 3}
+  taskbar: {fileID: 21300000, guid: 0c2258e02faa24163887200f7097ff3b, type: 3}
+  currentScreenText: Test Scene
+  numberOfButtons: 4
+  taskbarFractionOfScreen: 10
+  font: {fileID: 0}
+--- !u!4 &167024251
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 167024249}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: .147904888, y: .999789774, z: -10}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
 --- !u!1 &335186277
 GameObject:
   m_ObjectHideFlags: 0
@@ -124,6 +175,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8087394e77c97b408dc7e85a63e7552, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  showAllTestOutputs: 0
 --- !u!1 &446440695
 GameObject:
   m_ObjectHideFlags: 0
