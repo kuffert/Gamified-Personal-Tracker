@@ -9,7 +9,6 @@ public class UsersOpportunities : OpportunityController {
     void Start () {
         wipeAllOpportunityGameObjects();
         AppController.appController.Load();
-        setAllSkills();
         List<Opportunity> usersOpportunities = AppController.appController.getUsersSelectedOpportunities();
 
         float fractionOfScreenPerOpportunity = (1 - (2 * ApplicationView.applicationView.getTaskbarFractionOfScreen() / 100f)) / numberOfDisplayedOpportunities;

@@ -16,15 +16,16 @@ public class OpportunityController: MonoBehaviour {
 	private const string skillUrl = baseUrl + "/databases/" + database + "/collections/" + skillCollection + urlKeyEnd;
     
     public int numberOfDisplayedOpportunities;
-    public static List<Skill> allSkills;
     protected int numberOfVisibleCharacters = 35;
     protected List<GameObject> opportunityGameObjects = new List<GameObject>();
 
+    // Grab Opportunities from DB, return list of fully populated Opportunity objects
     // Should only be used once, on log in
     public static List<Opportunity> getOpportunities()
 	{
 		List<Opportunity> opportunities = new List<Opportunity>();
-		
+        List<Skill> allSkills = getSkills();
+
 		// Grab data
 		WWW www = new WWW(opportunityUrl);
 		while (!www.isDone) {/*do nothing, does not work otherwise*/}
@@ -34,36 +35,39 @@ public class OpportunityController: MonoBehaviour {
 		Opportunity temp;
 		while(N.Count > 0)
 		{
-			temp = mapOpportunity(N[0]);
+			temp = mapOpportunity(N[0], allSkills);
 			opportunities.Add(temp);
 			N.Remove(0);
 		}
 		return opportunities;
 	}
 
+    // Grab Skills from DB, return list of Skill objects
+    // Already used in pulling opportunities
 	public static List<Skill> getSkills()
 	{
 		List<Skill> skills = new List<Skill>();
 		
 		// Grab data
-		WWW www = new WWW(skillUrl);
-		while (!www.isDone) {/*do nothing, does not work otherwise*/}
-		var N = JSON.Parse(www.text);
+		WWW wwwSkill = new WWW(skillUrl);
+		while (!wwwSkill.isDone) {/*do nothing, does not work otherwise*/}
+		var S = JSON.Parse(wwwSkill.text);
 		
 		// Fill Skills
-		Skill temp;
-		while(N.Count > 0)
+		Skill temp = new Skill();
+		while(S.Count > 0)
 		{
-			Debug.Log(N.Count);
-			temp = mapSkill(N[0]);
+			Debug.Log(S.Count);
+			temp = mapSkill(S[0]);
 			skills.Add(temp);
-			N.Remove(0);
+			S.Remove(0);
 		}
 		Debug.Log(skills.Count);
 		return skills;
 	}
 
-    private static Opportunity mapOpportunity(JSONNode node)
+    // Map JSONNode to Opportunity objects
+    private static Opportunity mapOpportunity(JSONNode node, List<Skill> skills)
 	{
 		Opportunity opportunity = new Opportunity();
 
@@ -87,12 +91,13 @@ public class OpportunityController: MonoBehaviour {
 		opportunity.ContactOffice = node["contact_office"];
 		opportunity.ContactEmail = node["contact_email"];
 		opportunity.LearningOutcomes = convertToStringArray(node["learning_outcomes"]);
-		opportunity.Skills = convertToSkills(convertToStringArray(node["skills"]));
+		opportunity.Skills = convertToSkills(convertToStringArray(node["skills"]), skills);
 		opportunity.Engagement = node["engagement"];
 
 		return opportunity;
 	}
 
+    // Map JSONNode to Skill objects
 	private static Skill mapSkill(JSONNode node)
 	{
 		Skill skill = new Skill();
@@ -104,6 +109,7 @@ public class OpportunityController: MonoBehaviour {
 		return skill;
 	}
 
+    // convert JSONNode into int[]
 	private static int[] convertToIntArray(JSONNode node)
 	{
 		int[] result = new int[node.Count];
@@ -115,7 +121,8 @@ public class OpportunityController: MonoBehaviour {
 		return result;
 	}
 
-	private static string[] convertToStringArray(JSONNode node)
+    // convert JSONNode into string[]
+    private static string[] convertToStringArray(JSONNode node)
 	{
 		string[] result = new string[node.Count];
 		
@@ -126,15 +133,14 @@ public class OpportunityController: MonoBehaviour {
 		return result;
 	}
 
-	// I have NO IDEA Why this isn't working.
-    // the for loop will remove? Skills from the static allSkills field.
-	private static List<Skill> convertToSkills(string[] ids)
+    // Convert strings into Skills
+	private static List<Skill> convertToSkills(string[] ids, List<Skill> skills)
 	{
         List<Skill> result = new List<Skill>();
 		
 		for (int p = 0; p < ids.Length; p++) 
 		{
-            //result.Add(allSkills.First(item => item.Id == ids[p]));
+            result.Add(skills.First(item => item.Id == ids[p]));
    		}
 		return result;
 	}
@@ -148,8 +154,6 @@ public class OpportunityController: MonoBehaviour {
         TextMesh newText = newOpportunity.GetComponent<TextMesh>();
         int titleLength = opportunity.Title.Length;
         newText.text = titleLength < numberOfVisibleCharacters ? opportunity.Title : opportunity.Title.Substring(0, (titleLength < numberOfVisibleCharacters ? titleLength : numberOfVisibleCharacters)) + "...";
-        // How I was superficially checking the ConvertToSkills() bug
-        //newText.text = titleLength < numberOfVisibleCharacters ? OpportunityController.getAllSkills().First().Id : opportunity.Title.Substring(0, (titleLength < numberOfVisibleCharacters ? titleLength : numberOfVisibleCharacters)) + "...";
         newText.anchor = TextAnchor.UpperLeft;
         newText.characterSize = .025f;
         newText.fontSize = 200 - titleLength;
@@ -185,8 +189,4 @@ public class OpportunityController: MonoBehaviour {
         }
         return false;
     }
-
-    public static List<Skill> getAllSkills() { return allSkills; }
-    // Default to getting from DB.
-    public static void setAllSkills() { OpportunityController.allSkills = OpportunityController.getSkills(); }
 }
