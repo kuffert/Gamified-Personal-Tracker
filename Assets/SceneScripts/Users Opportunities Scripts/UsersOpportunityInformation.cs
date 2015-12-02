@@ -15,6 +15,8 @@ public class UsersOpportunityInformation : UsersOpportunities {
         opportunity = AppController.appController.getUsersSelectedOpportunities()[loadIndex]; 
         ApplicationView.applicationView.currentScreenText = opportunity.Title;
 
+        displayOpportunityMetadata(opportunity);
+
         completeText = new GameObject();
         completeText.AddComponent<TextMesh>();
         TextMesh completeTextMesh = completeText.GetComponent<TextMesh>();
@@ -36,6 +38,7 @@ public class UsersOpportunityInformation : UsersOpportunities {
         removeText.transform.position = Camera.main.ViewportToWorldPoint(new Vector3(.75f, .15f, 10f));
         removeText.GetComponent<MeshRenderer>().sortingOrder = 4;
         removeText.AddComponent<BoxCollider>();
+
     }
 
     void Update() {

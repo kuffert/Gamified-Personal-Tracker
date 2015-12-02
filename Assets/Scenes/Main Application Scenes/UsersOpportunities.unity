@@ -174,7 +174,7 @@ GameObject:
   - 4: {fileID: 434662132}
   - 114: {fileID: 434662130}
   m_Layer: 0
-  m_Name: StaticFeatures
+  m_Name: ApplicationView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

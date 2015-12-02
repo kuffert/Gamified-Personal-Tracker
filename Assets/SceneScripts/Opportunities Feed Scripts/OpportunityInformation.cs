@@ -15,6 +15,8 @@ public class OpportunityInformation : OpportunityFeed {
         opportunity = AppController.appController.getAllOpportunities()[loadIndex];
         ApplicationView.applicationView.currentScreenText = opportunity.Title;
 
+        displayOpportunityMetadata(opportunity);
+
         acceptText = new GameObject();
         acceptText.AddComponent<TextMesh>();
         TextMesh acceptTextMesh = acceptText.GetComponent<TextMesh>();

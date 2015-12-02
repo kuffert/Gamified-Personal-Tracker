@@ -19,6 +19,10 @@ public class OpportunityController: MonoBehaviour {
     protected int numberOfVisibleCharacters = 35;
     protected List<GameObject> opportunityGameObjects = new List<GameObject>();
 
+    private float oppMetaDataYLoc = .9f;
+    private float gapBetweenMetaData = .04f;
+    private int maxCharactersPerLine = 42;
+
     // Grab Opportunities from DB, return list of fully populated Opportunity objects
     // Should only be used once, on log in
     public static List<Opportunity> getOpportunities()
@@ -188,5 +192,90 @@ public class OpportunityController: MonoBehaviour {
             }
         }
         return false;
+    }
+
+    // Shows all of the Opportunity's metadata when it is selected
+    protected void displayOpportunityMetadata(Opportunity opportunity)
+    {
+        GameObject titleText = generateMetaDataText("TITLE: " + opportunity.Title);
+        
+        GameObject dateRange = generateMetaDataText("DATE RANGE: " + opportunity.StartDate + " - " + opportunity.EndDate);
+
+        GameObject location = generateMetaDataText("LOCATION: " + opportunity.Location);
+
+        GameObject contactName = generateMetaDataText("CONTACT: " + opportunity.ContactName);
+
+        GameObject contactEmail = generateMetaDataText("EMAIL: " + opportunity.ContactEmail);
+
+        GameObject contactOffice = generateMetaDataText("OFFICE: " + opportunity.ContactOffice);
+
+        string skillsText = "SKILLS: ";
+        foreach(Skill skill in opportunity.Skills)
+        {
+            skillsText += skill.SkillName + ", ";
+        }
+        skillsText = skillsText.Substring(0, skillsText.Length - 2);
+
+        //This is odd. Some opportunities have like 7 of the same skill?
+        GameObject skills = generateMetaDataText(skillsText); 
+    }
+
+    protected void displayOpportunityDescription(Opportunity opportunity)
+    {
+        GameObject description = generateMetaDataText("DESCRIPTION: " + opportunity.Description);
+    }
+
+    private GameObject generateMetaDataText(string metaDataText)
+    {
+        GameObject newMetaDataObject = new GameObject();
+        newMetaDataObject.transform.position = Camera.main.ViewportToWorldPoint(new Vector3(0f, oppMetaDataYLoc, 10f));
+        newMetaDataObject.AddComponent<TextMesh>();
+        TextMesh metaDataTextMesh = newMetaDataObject.GetComponent<TextMesh>();
+        metaDataTextMesh.anchor = TextAnchor.UpperLeft;
+        metaDataTextMesh.fontSize = 100;
+        metaDataTextMesh.characterSize = .025f;
+        metaDataTextMesh.text = fitTextToScreenWidth(metaDataText);
+
+        newMetaDataObject.GetComponent<MeshRenderer>().sortingOrder = 4;
+        
+        return newMetaDataObject;
+    }
+
+    private string fitTextToScreenWidth (string text)
+    {
+        string outcomeString = "";
+        oppMetaDataYLoc -= gapBetweenMetaData;
+        if (text.Length < maxCharactersPerLine)
+        {
+            return text;
+        }
+        else
+        {
+            string modifiedText = text;
+            while (modifiedText.Length > maxCharactersPerLine)
+            {
+                int indexOfLastSpace = findIndexOfLastSpace(modifiedText);
+                Debug.Log(modifiedText);
+                outcomeString += modifiedText.Substring(0, indexOfLastSpace) + "\n";
+                modifiedText = modifiedText.Substring(indexOfLastSpace, modifiedText.Length - indexOfLastSpace);
+                oppMetaDataYLoc -= gapBetweenMetaData -.01f;
+            }
+            outcomeString += modifiedText;
+            return outcomeString;
+        }
+    }
+
+    private int findIndexOfLastSpace(string text)
+    {
+        int length = text.Length >= maxCharactersPerLine ? maxCharactersPerLine : text.Length;
+
+        for (int i = length; i > 0;  i--)
+        {
+            if (text[i].Equals(' '))
+            {
+                return i;
+            }
+        }
+        return 0;
     }
 }
