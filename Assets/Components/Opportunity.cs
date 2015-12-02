@@ -19,7 +19,7 @@ public class Opportunity {
 	private string location;
 	private string[] recurrence;
 	private bool coop;
-	private int[] academicStanding; // May need to make this an enum as well. year 1,2,3,4,5,NU IN, last year or last semester
+	private string[] academicStanding; // May need to make this an enum as well. year 1,2,3,4,5,NU IN, last year or last semester
 	private string major;
 	private bool resident;
 	private string sponsor;
@@ -44,7 +44,7 @@ public class Opportunity {
         this.location = string.Empty;
         this.recurrence = new string[0];
         this.coop = false;
-        this.academicStanding = new int[0];
+        this.academicStanding = new string[0];
         this.major = string.Empty;
         this.resident = false;
         this.sponsor = string.Empty;
@@ -164,7 +164,7 @@ public class Opportunity {
 		}
 	}
  
-	public int[] AcademicStanding {
+	public string[] AcademicStanding {
 		get {
 			return this.academicStanding;
 		}

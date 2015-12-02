@@ -83,7 +83,7 @@ public class OpportunityController: MonoBehaviour {
 		opportunity.Location = node["location"];
 		opportunity.Recurrence = convertToStringArray(node["recurrence"]);
 		opportunity.Coop = node["co-op"].AsBool;
-		opportunity.AcademicStanding = convertToIntArray(node["academic_standing"]);
+		opportunity.AcademicStanding = convertToStringArray(node["academic_standing"]);
 		opportunity.Major = node["major"];
 		opportunity.Resident = node["resident"].AsBool;
 		opportunity.Sponsor = node["sponsor"];
