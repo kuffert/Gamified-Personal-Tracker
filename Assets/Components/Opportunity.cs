@@ -264,6 +264,7 @@ public class Opportunity {
         {
             foreach(string dimension in skill.Dimensions)
             {
+                // This needs to cover the case that dimension already exists due to a previous skill.
                 exp.add(dimension, 1);
             }
         }

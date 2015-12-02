@@ -104,7 +104,7 @@ public class OpportunityController: MonoBehaviour {
 		
 		skill.Id = node["_id"]["$oid"];
 		skill.SkillName = node["skill"];
-		skill.Dimensions = convertToStringArray(node["opportunities"]);
+		skill.Dimensions = convertToStringArray(node["dimensions"]);
 		
 		return skill;
 	}
