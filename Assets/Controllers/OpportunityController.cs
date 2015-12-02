@@ -132,7 +132,7 @@ public class OpportunityController: MonoBehaviour {
 		
 		for (int i = 0; i < node.Count; i++) 
 		{
-			result[i] = node[1];
+			result[i] = node[i];
 		}
 		return result;
 	}
