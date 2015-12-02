@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
 // Authors: Chris Kuffert, Craig Hammond, John Kelly, Yvette Kim, Zhenhuan Wu
 public class Testing : MonoBehaviour {
@@ -49,9 +51,34 @@ public class Testing : MonoBehaviour {
         outputTestResult(ApplicationView.applicationView.getYourOpportunitiesButton() != null);
         outputTestResult(ApplicationView.applicationView.getSettingsButton() != null);
         outputTestResult(ApplicationView.applicationView.getSceneText() != null);
-        
 
+        // TESTS FOR THE OPPORTUNITY CONTROLLER //
+        // Author: Yvette Kim
+        // Date: 12/2/15
 
+        List<Opportunity> opportunities = OpportunityController.getOpportunities();
+        List<Skill> skills = OpportunityController.getSkills();
+
+        // 12. Test getting opportunities from db
+        outputTestResult(opportunities != null);
+
+        // 13. Test getting skills from db, should be exactly 50 at all times
+        outputTestResult(skills.Count == 50);
+
+        // 14 - 16 
+        // Spot test opportunity mapping for string, string[], List<Skill>
+        outputTestResult(opportunities.First().Id != null);
+        outputTestResult(opportunities.First().AcademicStanding != null);
+        outputTestResult(opportunities.First().Skills != null);
+
+        // 17 - 21 
+        // Test Skills
+        Skill skill = skills.Find(item => item.SkillName == "Advocacy");
+
+        outputTestResult(skill.SkillName == "Advocacy");
+        outputTestResult(skill.Dimensions.Contains("Social Consciousness & Interpersonal Commitment"));
+        outputTestResult(skill.Dimensions.Length == 1);
+        outputTestResult(skill.Id == "563f9e95c58aed0304213e5b");
 
         outputFinalResult();
 	}
