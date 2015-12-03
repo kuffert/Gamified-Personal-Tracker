@@ -5,9 +5,11 @@ using System.Collections.Generic;
 // Date: 11/22/15
 public class UsersOpportunityInformation : UsersOpportunities {
 
-    GameObject completeText;
-    GameObject removeText;
-    Opportunity opportunity;
+    public Sprite buttonSprite;
+    private GameObject completeText;
+    private GameObject removeText;
+    private GameObject detailsText;
+    private Opportunity opportunity;
     
 	void Start () {
         AppController.appController.Load();
@@ -21,21 +23,32 @@ public class UsersOpportunityInformation : UsersOpportunities {
         completeText.AddComponent<TextMesh>();
         TextMesh completeTextMesh = completeText.GetComponent<TextMesh>();
         completeTextMesh.characterSize = .025f;
-        completeTextMesh.fontSize = 200;
+        completeTextMesh.fontSize = 150;
         completeTextMesh.text = "Complete";
         completeTextMesh.anchor = TextAnchor.MiddleCenter;
-        completeText.transform.position = Camera.main.ViewportToWorldPoint(new Vector3(.25f, .15f, 10f));
+        completeText.transform.position = Camera.main.ViewportToWorldPoint(new Vector3(.2f, .15f, 10f));
         completeText.GetComponent<MeshRenderer>().sortingOrder = 4;
         completeText.AddComponent<BoxCollider>();
+
+        detailsText = new GameObject();
+        detailsText.AddComponent<TextMesh>();
+        TextMesh descriptionTextMesh = detailsText.GetComponent<TextMesh>();
+        descriptionTextMesh.characterSize = .025f;
+        descriptionTextMesh.fontSize = 150;
+        descriptionTextMesh.text = "Details";
+        descriptionTextMesh.anchor = TextAnchor.MiddleCenter;
+        descriptionTextMesh.transform.position = Camera.main.ViewportToWorldPoint(new Vector3(.5f, .15f, 10f));
+        detailsText.GetComponent<MeshRenderer>().sortingOrder = 4;
+        detailsText.AddComponent<BoxCollider>();
 
         removeText = new GameObject();
         removeText.AddComponent<TextMesh>();
         TextMesh removeTextMesh = removeText.GetComponent<TextMesh>();
         removeTextMesh.characterSize = .025f;
-        removeTextMesh.fontSize = 200;
+        removeTextMesh.fontSize = 150;
         removeTextMesh.text = "Remove";
         removeTextMesh.anchor = TextAnchor.MiddleCenter;
-        removeText.transform.position = Camera.main.ViewportToWorldPoint(new Vector3(.75f, .15f, 10f));
+        removeText.transform.position = Camera.main.ViewportToWorldPoint(new Vector3(.8f, .15f, 10f));
         removeText.GetComponent<MeshRenderer>().sortingOrder = 4;
         removeText.AddComponent<BoxCollider>();
 
@@ -69,6 +82,11 @@ public class UsersOpportunityInformation : UsersOpportunities {
                 AppController.appController.setUsersSelectedOpportunities(oppList);
                 AppController.appController.Save();
                 Application.LoadLevel("UsersOpportunities");
+            }
+
+            if (detailsText.GetComponent<Collider>().Raycast(ray, out hit, 100.0f))
+            {
+                Application.LoadLevel("UsersOpportunityDescription");
             }
         }
     }

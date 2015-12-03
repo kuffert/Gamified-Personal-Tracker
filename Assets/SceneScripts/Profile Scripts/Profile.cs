@@ -151,7 +151,6 @@ public class Profile : MonoBehaviour {
 				xpBubbleSpriteRenderer.transform.localScale = userXPBubbleScale;	
 				break;
 		}
-		Debug.Log (name + "Bubble Object Created!");
 
 		// Set the Bubble Object to be Disabled:
 		XPBubbleObject.SetActive (false);

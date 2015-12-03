@@ -16,6 +16,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Main Application Scenes/Log In.unity
   - enabled: 1
-    path: Assets/Scenes/Opportunity Scene/UsersOpportunityInformation.unity
+    path: Assets/Scenes/Opportunity Scene/UsersOpps/UsersOpportunityInformation.unity
   - enabled: 1
-    path: Assets/Scenes/Opportunity Scene/OpportunityInformation.unity
+    path: Assets/Scenes/Opportunity Scene/GlobalOpps/OpportunityInformation.unity
+  - enabled: 1
+    path: Assets/Scenes/Opportunity Scene/UsersOpps/UsersOpportunityDescription.unity
+  - enabled: 1
+    path: Assets/Scenes/Opportunity Scene/GlobalOpps/OpportunityDescription.unity

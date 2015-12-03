@@ -61,12 +61,10 @@ public class OpportunityController: MonoBehaviour {
 		Skill temp = new Skill();
 		while(S.Count > 0)
 		{
-			Debug.Log(S.Count);
 			temp = mapSkill(S[0]);
 			skills.Add(temp);
 			S.Remove(0);
 		}
-		Debug.Log(skills.Count);
 		return skills;
 	}
 
@@ -255,7 +253,6 @@ public class OpportunityController: MonoBehaviour {
             while (modifiedText.Length > maxCharactersPerLine)
             {
                 int indexOfLastSpace = findIndexOfLastSpace(modifiedText);
-                Debug.Log(modifiedText);
                 outcomeString += modifiedText.Substring(0, indexOfLastSpace) + "\n";
                 modifiedText = modifiedText.Substring(indexOfLastSpace, modifiedText.Length - indexOfLastSpace);
                 oppMetaDataYLoc -= gapBetweenMetaData -.01f;

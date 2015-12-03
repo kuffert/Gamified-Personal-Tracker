@@ -97,7 +97,8 @@ public class ApplicationView : MonoBehaviour {
     // Anything in here will be run every tick.
 	void Update () {
         delegateNavigationFromTouch();
-	}
+        //sceneText.GetComponent<TextMesh>().text = currentScreenText;
+    }
 
     // Constructs a static element of the application.
     private GameObject generateBackground(Sprite sprite)
