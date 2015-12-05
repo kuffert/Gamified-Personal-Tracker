@@ -14,6 +14,7 @@ public class ApplicationView : MonoBehaviour {
     public Sprite profileIcon;
     public Sprite taskbar;
     public string currentScreenText;
+    public int currentScreenTextSize = 200;
 
     public int numberOfButtons;
     public int taskbarFractionOfScreen;
@@ -97,7 +98,6 @@ public class ApplicationView : MonoBehaviour {
     // Anything in here will be run every tick.
 	void Update () {
         delegateNavigationFromTouch();
-        //sceneText.GetComponent<TextMesh>().text = currentScreenText;
     }
 
     // Constructs a static element of the application.
@@ -167,12 +167,10 @@ public class ApplicationView : MonoBehaviour {
         GameObject sceneText = new GameObject();
         sceneText.AddComponent<TextMesh>();
         TextMesh sceneTextMesh = sceneText.GetComponent<TextMesh>();
-        //sceneTextMesh.font = font; Something about this is broken, and its causing a ton of problems.
         sceneTextMesh.text = currentScreenText;
         sceneTextMesh.anchor = TextAnchor.MiddleCenter;
         sceneTextMesh.characterSize = .025f;
-        sceneTextMesh.fontSize = 200;
-        // Set the text to "Northeastern Red":
+        sceneTextMesh.fontSize = currentScreenTextSize;
         Color NURed = new Color(204.0f, 0.0f, 0.0f);
         sceneTextMesh.color = NURed;
         return sceneText;

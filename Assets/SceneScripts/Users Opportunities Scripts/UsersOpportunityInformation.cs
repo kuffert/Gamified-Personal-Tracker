@@ -14,7 +14,8 @@ public class UsersOpportunityInformation : UsersOpportunities {
         AppController.appController.Load();
         int loadIndex = AppController.appController.getUsersSelectedOpportunityIndex();
         opportunity = AppController.appController.getUsersSelectedOpportunities()[loadIndex]; 
-        ApplicationView.applicationView.currentScreenText = opportunity.Title;
+        ApplicationView.applicationView.currentScreenText = truncateTitle (opportunity, numberOfVisibleCharacters, opportunity.Title.Length);
+        ApplicationView.applicationView.currentScreenTextSize = 200 - opportunity.Title.Length;
 
         displayOpportunityMetadata(opportunity);
 

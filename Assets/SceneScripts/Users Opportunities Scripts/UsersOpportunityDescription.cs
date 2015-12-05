@@ -11,6 +11,7 @@ public class UsersOpportunityDescription : UsersOpportunities {
         int loadIndex = AppController.appController.getUsersSelectedOpportunityIndex();
         Opportunity opportunity = AppController.appController.getUsersSelectedOpportunities()[loadIndex];
         ApplicationView.applicationView.getSceneText().GetComponent<TextMesh>().text = opportunity.Title;
+        ApplicationView.applicationView.getSceneText().GetComponent<TextMesh>().fontSize = 200 - opportunity.Title.Length;
 
         displayOpportunityDescription(opportunity);
 

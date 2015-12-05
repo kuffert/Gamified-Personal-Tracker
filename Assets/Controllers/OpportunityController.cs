@@ -17,13 +17,13 @@ public class OpportunityController: MonoBehaviour {
     
     public int numberOfDisplayedOpportunities;
     public Sprite buttonSprite;
-    protected int numberOfVisibleCharacters = 35;
+    protected int numberOfVisibleCharacters = 33;
     protected List<GameObject> opportunityButtonObjects = new List<GameObject>();
     protected List<GameObject> opportunityTextObjects = new List<GameObject>();
 
     private float oppMetaDataYLoc = .9f;
     private float gapBetweenMetaData = .04f;
-    private int maxCharactersPerLine = 42;
+    private int maxCharactersPerLine = 41;
 
     // Grab Opportunities from DB, return list of fully populated Opportunity objects
     // Should only be used once, on log in
@@ -160,7 +160,7 @@ public class OpportunityController: MonoBehaviour {
         newOpportunityText.AddComponent<TextMesh>();
         TextMesh newText = newOpportunityText.GetComponent<TextMesh>();
         int titleLength = opportunity.Title.Length;
-        newText.text = titleLength < numberOfVisibleCharacters ? opportunity.Title : opportunity.Title.Substring(0, (titleLength < numberOfVisibleCharacters ? titleLength : numberOfVisibleCharacters)) + "...";
+        newText.text = truncateTitle(opportunity, numberOfVisibleCharacters, titleLength);
         newText.anchor = TextAnchor.MiddleLeft;
         newText.characterSize = .025f;
         newText.fontSize = 200 - titleLength;
@@ -182,11 +182,17 @@ public class OpportunityController: MonoBehaviour {
     // Wipe all opportunityGameObjects
     public void wipeAllOpportunityGameObjects()
     {
-        foreach (GameObject opportunityObject in opportunityButtonObjects)
+        foreach (GameObject opportunityButton in opportunityButtonObjects)
         {
-            Destroy(opportunityObject);
+            Destroy(opportunityButton);
         }
         opportunityButtonObjects.Clear();
+
+        foreach(GameObject opportunityText in opportunityTextObjects)
+        {
+            Destroy(opportunityText);
+        }
+        opportunityTextObjects.Clear();
     }
 
     // Checks if a list of opportunities contains an opportunity with the given id
@@ -200,6 +206,12 @@ public class OpportunityController: MonoBehaviour {
             }
         }
         return false;
+    }
+
+    // Truncated a title down to size to fit on the screen. 
+    protected string truncateTitle (Opportunity opportunity, int numberOfVisibleCharacters, int titleLength)
+    {
+        return titleLength < numberOfVisibleCharacters ? opportunity.Title : opportunity.Title.Substring(0, (titleLength < numberOfVisibleCharacters ? titleLength : numberOfVisibleCharacters)) + "...";
     }
 
     // Shows all of the Opportunity's metadata when it is selected

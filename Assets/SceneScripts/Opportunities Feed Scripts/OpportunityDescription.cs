@@ -11,6 +11,7 @@ public class OpportunityDescription : OpportunityFeed {
         int loadIndex = AppController.appController.getOpportunityFeedIndex();
         Opportunity opportunity = AppController.appController.getAllOpportunities()[loadIndex];
         ApplicationView.applicationView.getSceneText().GetComponent<TextMesh>().text = opportunity.Title;
+        ApplicationView.applicationView.getSceneText().GetComponent<TextMesh>().fontSize = 200 - opportunity.Title.Length;
 
         displayOpportunityDescription(opportunity);
 
