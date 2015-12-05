@@ -16,6 +16,7 @@ public class OpportunityController: MonoBehaviour {
 	private const string skillUrl = baseUrl + "/databases/" + database + "/collections/" + skillCollection + urlKeyEnd;
     
     public int numberOfDisplayedOpportunities;
+    public Sprite buttonSprite;
     protected int numberOfVisibleCharacters = 35;
     protected List<GameObject> opportunityGameObjects = new List<GameObject>();
 
@@ -195,17 +196,17 @@ public class OpportunityController: MonoBehaviour {
     // Shows all of the Opportunity's metadata when it is selected
     protected void displayOpportunityMetadata(Opportunity opportunity)
     {
-        GameObject titleText = generateMetaDataText("TITLE: " + opportunity.Title);
+        generateMetaDataText("TITLE: " + opportunity.Title);
         
-        GameObject dateRange = generateMetaDataText("DATE RANGE: " + opportunity.StartDate + " - " + opportunity.EndDate);
+        generateMetaDataText("DATE RANGE: " + opportunity.StartDate + " - " + opportunity.EndDate);
 
-        GameObject location = generateMetaDataText("LOCATION: " + opportunity.Location);
+        generateMetaDataText("LOCATION: " + opportunity.Location);
 
-        GameObject contactName = generateMetaDataText("CONTACT: " + opportunity.ContactName);
+        generateMetaDataText("CONTACT: " + opportunity.ContactName);
 
-        GameObject contactEmail = generateMetaDataText("EMAIL: " + opportunity.ContactEmail);
+        generateMetaDataText("EMAIL: " + opportunity.ContactEmail);
 
-        GameObject contactOffice = generateMetaDataText("OFFICE: " + opportunity.ContactOffice);
+        generateMetaDataText("OFFICE: " + opportunity.ContactOffice);
 
         string skillsText = "SKILLS: ";
         foreach(Skill skill in opportunity.Skills)
@@ -215,14 +216,16 @@ public class OpportunityController: MonoBehaviour {
         skillsText = skillsText.Substring(0, skillsText.Length - 2);
 
         //This is odd. Some opportunities have like 7 of the same skill?
-        GameObject skills = generateMetaDataText(skillsText); 
+        generateMetaDataText(skillsText); 
     }
 
+    // Shows the opportunity's description
     protected void displayOpportunityDescription(Opportunity opportunity)
     {
-        GameObject description = generateMetaDataText("DESCRIPTION: " + opportunity.Description);
+        generateMetaDataText("DESCRIPTION: " + opportunity.Description);
     }
 
+    // Generates the gameobject that will show a particular piece of opportunity metadata
     private GameObject generateMetaDataText(string metaDataText)
     {
         GameObject newMetaDataObject = new GameObject();
@@ -239,6 +242,7 @@ public class OpportunityController: MonoBehaviour {
         return newMetaDataObject;
     }
 
+    // Adds new line characters at predetermined intervals so the text will fit the screen
     private string fitTextToScreenWidth (string text)
     {
         string outcomeString = "";
@@ -262,6 +266,7 @@ public class OpportunityController: MonoBehaviour {
         }
     }
 
+    // Returns the index of the last space in a string
     private int findIndexOfLastSpace(string text)
     {
         int length = text.Length >= maxCharactersPerLine ? maxCharactersPerLine : text.Length;
@@ -274,5 +279,36 @@ public class OpportunityController: MonoBehaviour {
             }
         }
         return 0;
+    }
+
+    // Generates a text object to overlay a button on the opportunity information and description scenes
+    protected GameObject generateTextOverlay(float xLoc, string text)
+    {
+        GameObject textOverlay = new GameObject();
+        textOverlay.AddComponent<TextMesh>();
+        TextMesh acceptTextMesh = textOverlay.GetComponent<TextMesh>();
+        acceptTextMesh.characterSize = .025f;
+        acceptTextMesh.fontSize = 150;
+        acceptTextMesh.text = text;
+        acceptTextMesh.color = Color.black;
+        acceptTextMesh.anchor = TextAnchor.MiddleCenter;
+        textOverlay.transform.position = Camera.main.ViewportToWorldPoint(new Vector3(xLoc, .15f, 10f));
+        textOverlay.GetComponent<MeshRenderer>().sortingOrder = 4;
+
+        return textOverlay;
+    }
+
+    // Generates a button object to allow navigation to opportunity metadata
+    protected GameObject generateMetaDataNavigationButton(float xLoc, int buttonsOnScreen)
+    {
+        GameObject metaDataNavigationButton = new GameObject();
+        metaDataNavigationButton.AddComponent<SpriteRenderer>().sprite = buttonSprite;
+        metaDataNavigationButton.transform.position = Camera.main.ViewportToWorldPoint(new Vector3(xLoc, .15f, 10f));
+        metaDataNavigationButton.GetComponent<SpriteRenderer>().sortingOrder = 3;
+        float completeTextButtonWidth = ApplicationView.calculateSpriteUnitWidth(buttonSprite);
+        metaDataNavigationButton.GetComponent<SpriteRenderer>().transform.localScale = new Vector3(ApplicationView.orthographicScreenWidth / completeTextButtonWidth / buttonsOnScreen, .8f);
+        metaDataNavigationButton.AddComponent<BoxCollider>();
+
+        return metaDataNavigationButton;
     }
 }

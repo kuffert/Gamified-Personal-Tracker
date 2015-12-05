@@ -68,8 +68,6 @@ public class AppController : MonoBehaviour {
     void Awake () {
         if (appController == null)
         {
-            // INITIALIZE THE LIST YOU BIIITCH
-
             DontDestroyOnLoad(gameObject);
             setAllOpportunities(new List<Opportunity>());
             setUsersSelectedOpportunities(new List<Opportunity>());

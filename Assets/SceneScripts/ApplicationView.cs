@@ -20,8 +20,8 @@ public class ApplicationView : MonoBehaviour {
 
 	public Font font;
 
-    private float orthographicScreenHeight;
-    private float orthographicScreenWidth;
+    public static float orthographicScreenHeight;
+    public static float orthographicScreenWidth;
 
     private GameObject background;
     private GameObject topTaskbar;
@@ -51,15 +51,15 @@ public class ApplicationView : MonoBehaviour {
     void Awake()
     {
         applicationView = this;
+
+        // Determines the screensize we will need to scale the UI elements.
+        orthographicScreenHeight = Camera.main.orthographicSize * 2;
+        orthographicScreenWidth = orthographicScreenHeight * Screen.width / Screen.height;
     }
 
     // Anything in here will be run, created, instantiated, etc. immediately as the application starts.
     void Start () {
-
-        // Determines the screensize we will need to scale the UI elements.
         Camera camera = Camera.main;
-        orthographicScreenHeight = Camera.main.orthographicSize * 2;
-        orthographicScreenWidth = orthographicScreenHeight * Screen.width / Screen.height;
 
         // Creates the generic screen objects; background, taskbars, and each navigation button.
         background = generateBackground(backgroundImage);
@@ -180,14 +180,14 @@ public class ApplicationView : MonoBehaviour {
 
     // Helper for dynamically scaling the buttons (x)
     // This calculates the Sprites "Unit" width, which is the the unit of measurement in Unity.
-    private float calculateSpriteUnitWidth(Sprite sprite)
+    public static float calculateSpriteUnitWidth(Sprite sprite)
     {
         return sprite.textureRect.width / sprite.pixelsPerUnit;
     }
 
     // Helper for dynamically scaling the buttons (y)
     // This calculates the Sprites "Unit" height, which is the the unit of measurement in Unity.
-    private float calculateSpriteUnitHeight(Sprite sprite)
+    public static float calculateSpriteUnitHeight(Sprite sprite)
     {
         return sprite.textureRect.height / sprite.pixelsPerUnit;
     }

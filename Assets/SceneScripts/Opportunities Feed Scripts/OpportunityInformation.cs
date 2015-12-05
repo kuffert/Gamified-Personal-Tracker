@@ -4,11 +4,10 @@ using System.Collections.Generic;
 // Author: Chris Kuffert
 // Date: 11/22/15
 public class OpportunityInformation : OpportunityFeed {
-
-    public Sprite buttonSprite;
-    private GameObject acceptText;
+    
+    private GameObject acceptTextButton;
     private Opportunity opportunity;
-    private GameObject detailsText;
+    private GameObject detailsTextButton;
     
     // Use this for initialization
     void Start () {
@@ -19,31 +18,15 @@ public class OpportunityInformation : OpportunityFeed {
 
         displayOpportunityMetadata(opportunity);
 
-        acceptText = new GameObject();
-        acceptText.AddComponent<TextMesh>();
-        TextMesh acceptTextMesh = acceptText.GetComponent<TextMesh>();
-        acceptTextMesh.characterSize = .025f;
-        acceptTextMesh.fontSize = 150;
-        acceptTextMesh.text = "Accept";
-        acceptTextMesh.anchor = TextAnchor.MiddleCenter;
-        acceptText.transform.position = Camera.main.ViewportToWorldPoint(new Vector3(.25f, .15f, 10f));
-        acceptText.GetComponent<MeshRenderer>().sortingOrder = 4;
-        acceptText.AddComponent<BoxCollider>();
+        GameObject acceptText = generateTextOverlay(.25f, "Accept");
+        acceptTextButton = generateMetaDataNavigationButton(.25f, 2);
 
-        detailsText = new GameObject();
-        detailsText.AddComponent<TextMesh>();
-        TextMesh descriptionTextMesh = detailsText.GetComponent<TextMesh>();
-        descriptionTextMesh.characterSize = .025f;
-        descriptionTextMesh.fontSize = 150;
-        descriptionTextMesh.text = "Details";
-        descriptionTextMesh.anchor = TextAnchor.MiddleCenter;
-        descriptionTextMesh.transform.position = Camera.main.ViewportToWorldPoint(new Vector3(.75f, .15f, 10f));
-        detailsText.GetComponent<MeshRenderer>().sortingOrder = 4;
-        detailsText.AddComponent<BoxCollider>();
+        generateTextOverlay(.75f, "Details");
+        detailsTextButton = generateMetaDataNavigationButton(.75f, 2);
 
         if (containsOpportunityId(AppController.appController.getUsersSelectedOpportunities(), opportunity.Id))
         {
-            acceptTextMesh.text = "Accepted";
+            acceptText.GetComponent<TextMesh>().text = "Accepted";
         }
     }
 	
@@ -53,7 +36,7 @@ public class OpportunityInformation : OpportunityFeed {
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
-            if (acceptText.GetComponent<Collider>().Raycast(ray, out hit, 100.0F) && !containsOpportunityId(AppController.appController.getUsersSelectedOpportunities(), opportunity.Id))
+            if (acceptTextButton.GetComponent<Collider>().Raycast(ray, out hit, 100.0F) && !containsOpportunityId(AppController.appController.getUsersSelectedOpportunities(), opportunity.Id))
             {
                 List<Opportunity> allOppList = AppController.appController.getUsersSelectedOpportunities();
                 allOppList.Add(opportunity);
@@ -62,7 +45,7 @@ public class OpportunityInformation : OpportunityFeed {
                 Application.LoadLevel("UsersOpportunities");
             }
 
-            if (detailsText.GetComponent<Collider>().Raycast(ray, out hit, 100.0f))
+            if (detailsTextButton.GetComponent<Collider>().Raycast(ray, out hit, 100.0f))
             {
                 Application.LoadLevel("OpportunityDescription");
             }

@@ -4,11 +4,10 @@ using System.Collections.Generic;
 // Author: Chris Kuffert
 // Date: 11/22/15
 public class UsersOpportunityInformation : UsersOpportunities {
-
-    public Sprite buttonSprite;
-    private GameObject completeText;
-    private GameObject removeText;
-    private GameObject detailsText;
+    
+    private GameObject completeTextButton;
+    private GameObject removeTextButton;
+    private GameObject detailsTextButton;
     private Opportunity opportunity;
     
 	void Start () {
@@ -19,39 +18,14 @@ public class UsersOpportunityInformation : UsersOpportunities {
 
         displayOpportunityMetadata(opportunity);
 
-        completeText = new GameObject();
-        completeText.AddComponent<TextMesh>();
-        TextMesh completeTextMesh = completeText.GetComponent<TextMesh>();
-        completeTextMesh.characterSize = .025f;
-        completeTextMesh.fontSize = 150;
-        completeTextMesh.text = "Complete";
-        completeTextMesh.anchor = TextAnchor.MiddleCenter;
-        completeText.transform.position = Camera.main.ViewportToWorldPoint(new Vector3(.2f, .15f, 10f));
-        completeText.GetComponent<MeshRenderer>().sortingOrder = 4;
-        completeText.AddComponent<BoxCollider>();
+        generateTextOverlay(.17f, "Complete");
+        completeTextButton = generateMetaDataNavigationButton(.17f, 3);
 
-        detailsText = new GameObject();
-        detailsText.AddComponent<TextMesh>();
-        TextMesh descriptionTextMesh = detailsText.GetComponent<TextMesh>();
-        descriptionTextMesh.characterSize = .025f;
-        descriptionTextMesh.fontSize = 150;
-        descriptionTextMesh.text = "Details";
-        descriptionTextMesh.anchor = TextAnchor.MiddleCenter;
-        descriptionTextMesh.transform.position = Camera.main.ViewportToWorldPoint(new Vector3(.5f, .15f, 10f));
-        detailsText.GetComponent<MeshRenderer>().sortingOrder = 4;
-        detailsText.AddComponent<BoxCollider>();
+        generateTextOverlay(.5f, "Details");
+        detailsTextButton = generateMetaDataNavigationButton(.5f, 3);
 
-        removeText = new GameObject();
-        removeText.AddComponent<TextMesh>();
-        TextMesh removeTextMesh = removeText.GetComponent<TextMesh>();
-        removeTextMesh.characterSize = .025f;
-        removeTextMesh.fontSize = 150;
-        removeTextMesh.text = "Remove";
-        removeTextMesh.anchor = TextAnchor.MiddleCenter;
-        removeText.transform.position = Camera.main.ViewportToWorldPoint(new Vector3(.8f, .15f, 10f));
-        removeText.GetComponent<MeshRenderer>().sortingOrder = 4;
-        removeText.AddComponent<BoxCollider>();
-
+        generateTextOverlay(.83f, "Remove");
+        removeTextButton = generateMetaDataNavigationButton(.83f, 3);
     }
 
     void Update() {
@@ -59,12 +33,9 @@ public class UsersOpportunityInformation : UsersOpportunities {
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
-            if (completeText.GetComponent<Collider>().Raycast(ray, out hit, 100.0F))
+            if (completeTextButton.GetComponent<Collider>().Raycast(ray, out hit, 100.0F))
             {
-                // @Yvette or @Craig, add the level up code here!
-                // Added -Craig
                 AddExp();
-
                 List<Opportunity> completedOppList = AppController.appController.getUsersCompletedOpportunities();
                 completedOppList.Add(opportunity);
                 AppController.appController.setUsersCompletedOpportunities(completedOppList);
@@ -75,7 +46,7 @@ public class UsersOpportunityInformation : UsersOpportunities {
                 Application.LoadLevel("Profile");
             }
 
-            if (removeText.GetComponent<Collider>().Raycast(ray, out hit, 100.0f))
+            if (removeTextButton.GetComponent<Collider>().Raycast(ray, out hit, 100.0f))
             {
                 List<Opportunity> oppList = AppController.appController.getUsersSelectedOpportunities();
                 oppList.RemoveAt(AppController.appController.getUsersSelectedOpportunityIndex());
@@ -84,7 +55,7 @@ public class UsersOpportunityInformation : UsersOpportunities {
                 Application.LoadLevel("UsersOpportunities");
             }
 
-            if (detailsText.GetComponent<Collider>().Raycast(ray, out hit, 100.0f))
+            if (detailsTextButton.GetComponent<Collider>().Raycast(ray, out hit, 100.0f))
             {
                 Application.LoadLevel("UsersOpportunityDescription");
             }
