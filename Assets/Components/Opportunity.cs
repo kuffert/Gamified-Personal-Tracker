@@ -264,8 +264,14 @@ public class Opportunity {
         {
             foreach(string dimension in skill.Dimensions)
             {
-                // This needs to cover the case that dimension already exists due to a previous skill.
-                exp.add(dimension, 1);
+                if (exp.totals.ContainsKey(dimension))
+                {
+                    exp.totals[dimension] += 1;
+                }
+                else
+                {
+                    exp.add(dimension, 1);
+                }
             }
         }
 
