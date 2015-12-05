@@ -18,7 +18,8 @@ public class OpportunityController: MonoBehaviour {
     public int numberOfDisplayedOpportunities;
     public Sprite buttonSprite;
     protected int numberOfVisibleCharacters = 35;
-    protected List<GameObject> opportunityGameObjects = new List<GameObject>();
+    protected List<GameObject> opportunityButtonObjects = new List<GameObject>();
+    protected List<GameObject> opportunityTextObjects = new List<GameObject>();
 
     private float oppMetaDataYLoc = .9f;
     private float gapBetweenMetaData = .04f;
@@ -148,36 +149,44 @@ public class OpportunityController: MonoBehaviour {
 		return result;
 	}
 
-    // Generates an opportunity gameObject based on opporuntity given.
-    public GameObject generateOpportunity(int opportunityNumber, Opportunity opportunity, int numberOfVisibleCharacters, float fractionOfScreenPerOpportunity)
+    // Generates an a text object and an interactable button to allow navigation when an opportunity is selected.
+    public void generateOpportunity(int opportunityNumber, Opportunity opportunity, int numberOfVisibleCharacters, float fractionOfScreenPerOpportunity)
     {
-        GameObject newOpportunity = new GameObject();
+        float newOpportunitySpriteWidth = ApplicationView.calculateSpriteUnitWidth(buttonSprite);
+        float newOpportunitySpriteHeight = ApplicationView.calculateSpriteUnitHeight(buttonSprite);
+        float opportunityPositionY = 1f - (ApplicationView.applicationView.getTaskbarFractionOfScreen() / 100f + opportunityNumber * fractionOfScreenPerOpportunity) - .043f;
 
-        newOpportunity.AddComponent<TextMesh>();
-        TextMesh newText = newOpportunity.GetComponent<TextMesh>();
+        GameObject newOpportunityText = new GameObject();
+        newOpportunityText.AddComponent<TextMesh>();
+        TextMesh newText = newOpportunityText.GetComponent<TextMesh>();
         int titleLength = opportunity.Title.Length;
         newText.text = titleLength < numberOfVisibleCharacters ? opportunity.Title : opportunity.Title.Substring(0, (titleLength < numberOfVisibleCharacters ? titleLength : numberOfVisibleCharacters)) + "...";
-        newText.anchor = TextAnchor.UpperLeft;
+        newText.anchor = TextAnchor.MiddleLeft;
         newText.characterSize = .025f;
         newText.fontSize = 200 - titleLength;
         newText.color = Color.red;
+        newOpportunityText.transform.position = Camera.main.ViewportToWorldPoint(new Vector3(0f, opportunityPositionY, 10f));
+        newOpportunityText.GetComponent<MeshRenderer>().sortingOrder = 5;
+        opportunityTextObjects.Add(newOpportunityText);
 
-        newOpportunity.transform.position = Camera.main.ViewportToWorldPoint(new Vector3(0f, 1f - (ApplicationView.applicationView.getTaskbarFractionOfScreen() / 100f + opportunityNumber * fractionOfScreenPerOpportunity), 10));
-        newOpportunity.GetComponent<MeshRenderer>().sortingOrder = 4;
-
-        newOpportunity.AddComponent<BoxCollider>();
-
-        return newOpportunity;
+        GameObject newOpportunityButton = new GameObject();
+        newOpportunityButton.AddComponent<SpriteRenderer>().sprite = buttonSprite;
+        newOpportunityButton.transform.position = Camera.main.ViewportToWorldPoint(new Vector3(.5f, opportunityPositionY, 10f));
+        newOpportunityButton.GetComponent<SpriteRenderer>().sortingOrder = 4;
+        
+        newOpportunityButton.GetComponent<SpriteRenderer>().transform.localScale = new Vector3(ApplicationView.orthographicScreenWidth / newOpportunitySpriteWidth, (ApplicationView.orthographicScreenHeight - newOpportunitySpriteHeight*2) / newOpportunitySpriteHeight / ApplicationView.applicationView.taskbarFractionOfScreen);
+        newOpportunityButton.AddComponent<BoxCollider>();
+        opportunityButtonObjects.Add(newOpportunityButton);
     }
 
     // Wipe all opportunityGameObjects
     public void wipeAllOpportunityGameObjects()
     {
-        foreach (GameObject opportunityObject in opportunityGameObjects)
+        foreach (GameObject opportunityObject in opportunityButtonObjects)
         {
             Destroy(opportunityObject);
         }
-        opportunityGameObjects.Clear();
+        opportunityButtonObjects.Clear();
     }
 
     // Checks if a list of opportunities contains an opportunity with the given id
@@ -293,7 +302,7 @@ public class OpportunityController: MonoBehaviour {
         acceptTextMesh.color = Color.black;
         acceptTextMesh.anchor = TextAnchor.MiddleCenter;
         textOverlay.transform.position = Camera.main.ViewportToWorldPoint(new Vector3(xLoc, .15f, 10f));
-        textOverlay.GetComponent<MeshRenderer>().sortingOrder = 4;
+        textOverlay.GetComponent<MeshRenderer>().sortingOrder = 5;
 
         return textOverlay;
     }
@@ -304,9 +313,9 @@ public class OpportunityController: MonoBehaviour {
         GameObject metaDataNavigationButton = new GameObject();
         metaDataNavigationButton.AddComponent<SpriteRenderer>().sprite = buttonSprite;
         metaDataNavigationButton.transform.position = Camera.main.ViewportToWorldPoint(new Vector3(xLoc, .15f, 10f));
-        metaDataNavigationButton.GetComponent<SpriteRenderer>().sortingOrder = 3;
+        metaDataNavigationButton.GetComponent<SpriteRenderer>().sortingOrder = 4;
         float completeTextButtonWidth = ApplicationView.calculateSpriteUnitWidth(buttonSprite);
-        metaDataNavigationButton.GetComponent<SpriteRenderer>().transform.localScale = new Vector3(ApplicationView.orthographicScreenWidth / completeTextButtonWidth / buttonsOnScreen, .8f);
+        metaDataNavigationButton.GetComponent<SpriteRenderer>().transform.localScale = new Vector3(ApplicationView.orthographicScreenWidth / completeTextButtonWidth / buttonsOnScreen, 1f);
         metaDataNavigationButton.AddComponent<BoxCollider>();
 
         return metaDataNavigationButton;

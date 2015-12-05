@@ -125,7 +125,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   numberOfDisplayedOpportunities: 0
-  buttonSprite: {fileID: 21300000, guid: 0c2258e02faa24163887200f7097ff3b, type: 3}
+  buttonSprite: {fileID: 21300000, guid: 201efe1dafd85354b84601c1c04e1c0f, type: 3}
 --- !u!1 &401007780
 GameObject:
   m_ObjectHideFlags: 0

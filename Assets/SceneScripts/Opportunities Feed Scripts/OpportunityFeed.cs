@@ -16,7 +16,7 @@ public class OpportunityFeed : OpportunityController {
 		
 		for (int i = 0; i < usersOpportunities.Count && i < numberOfDisplayedOpportunities; i++)
 		{
-            opportunityGameObjects.Add(generateOpportunity(i, usersOpportunities[i], numberOfVisibleCharacters, fractionOfScreenPerOpportunity));
+            generateOpportunity(i, usersOpportunities[i], numberOfVisibleCharacters, fractionOfScreenPerOpportunity);
 		}
 	}
 	
@@ -43,11 +43,11 @@ public class OpportunityFeed : OpportunityController {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
-            foreach (GameObject opportunityObject in opportunityGameObjects)
+            foreach (GameObject opportunityObject in opportunityButtonObjects)
             {
                 if (opportunityObject.GetComponent<Collider>().Raycast(ray, out hit, 100.0F))
                 {
-                    int saveIndex = (AppController.appController.getOpportunityFeedPageNumber() * numberOfDisplayedOpportunities) + opportunityGameObjects.IndexOf(opportunityObject);
+                    int saveIndex = (AppController.appController.getOpportunityFeedPageNumber() * numberOfDisplayedOpportunities) + opportunityButtonObjects.IndexOf(opportunityObject);
                     AppController.appController.setOpportunityFeedIndex(saveIndex);
                     AppController.appController.Save();
                     Application.LoadLevel("OpportunityInformation"); 
