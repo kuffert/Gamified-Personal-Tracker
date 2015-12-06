@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+
+// Author: John Kelly
 public class Profile : MonoBehaviour {
 
 	// Button Sprites:
@@ -175,8 +177,9 @@ public class Profile : MonoBehaviour {
 		XPTextObjectTextMesh.text = xp.ToString ();
 		XPTextObjectTextMesh.anchor = TextAnchor.MiddleCenter;
 		XPTextObjectTextMesh.characterSize = .025f;
+        XPTextObjectTextMesh.color = Color.black;
 		XPTextObjectTextMesh.fontSize = 400;
-		XPTextObject.GetComponent<MeshRenderer> ().sortingOrder = 3;
+		XPTextObject.GetComponent<MeshRenderer> ().sortingOrder = 4;
 
 		Debug.Log (name + "Text Object Created!");
 
