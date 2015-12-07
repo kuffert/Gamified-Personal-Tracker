@@ -6,6 +6,9 @@ public class Login : MonoBehaviour {
 	// The ultimate login checker:
 	private string superSecretPassword = "password";
 
+	// Label GUIStyle:
+	private GUIStyle labelStyle = new GUIStyle ();
+
 	// TextField Strings:
 	private string userNameString = "Username";
 	private string userPasswordString = "Password";
@@ -18,6 +21,8 @@ public class Login : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		AppController.appController.Load ();
+		labelStyle.alignment = TextAnchor.MiddleCenter;
+		labelStyle.fontSize = 16;
 	}
 	
 	// Update is called once per frame
@@ -31,10 +36,11 @@ public class Login : MonoBehaviour {
 
 	private void windowFunciton (int windowID) {
 		// Labels:
-		GUI.Label (new Rect (Screen.width / 3, 0.25f * Screen.height / 5f, Screen.width / 2, Screen.height / 10), "Enter a Username:");
-		GUI.Label (new Rect (Screen.width / 3, 1.25f * Screen.height / 5f, Screen.width / 2, Screen.height / 10), "Enter the Password:");
-		GUI.Label (new Rect (Screen.width / 3, 2.25f * Screen.height / 5f, Screen.width / 2, Screen.height / 10), "Enter a Major:");
-		GUI.Label (new Rect (Screen.width / 3, 3.25f * Screen.height / 5f, Screen.width / 2, Screen.height / 10), "Enter a Year:");
+
+		GUI.Label (new Rect (Screen.width / 4, 0.15f * Screen.height / 5f, Screen.width / 2, Screen.height / 10), "Enter a Username:", labelStyle);
+		GUI.Label (new Rect (Screen.width / 4, 1.15f * Screen.height / 5f, Screen.width / 2, Screen.height / 10), "Enter the Password:", labelStyle);
+		GUI.Label (new Rect (Screen.width / 4, 2.15f * Screen.height / 5f, Screen.width / 2, Screen.height / 10), "Enter a Major:", labelStyle);
+		GUI.Label (new Rect (Screen.width / 4, 3.15f * Screen.height / 5f, Screen.width / 2, Screen.height / 10), "Enter a Year:", labelStyle);
 
 		// TextFields:
 		userNameString		= GUI.TextField(new Rect(Screen.width/3, 0.5f * Screen.height/5f, Screen.width/3, Screen.height/10), userNameString, 10);
@@ -44,11 +50,11 @@ public class Login : MonoBehaviour {
 
 		if (GUI.Button (new Rect(Screen.width/3, 4.25f * Screen.height/5, Screen.width/3, Screen.height/10), "GO!")) {
 			if (userPasswordString == superSecretPassword) {
-				Debug.Log ("Setting Data and Logging In...");
 				AppController.appController.setUsername (userNameString);
 				AppController.appController.setMajor (userMajorString);
 				AppController.appController.setYear (int.Parse(userYearString));
 				AppController.appController.Save ();
+				Debug.Log ("Setting Data and Logging In...");
 				Application.LoadLevel ("Profile");
 			}
 			else {
