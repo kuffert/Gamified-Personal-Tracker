@@ -19,6 +19,9 @@ public class Profile : MonoBehaviour {
 	public Sprite PPBubbleSprite;
 	public Sprite WBBubbleSprite;
 
+	// Dimension Title Object;
+	private GameObject dimensionTitleObject;
+
 	// UI Dynamic Scaling vars:
 	private float orthographicScreenHeight;
 	private float orthographicScreenWidth;
@@ -37,9 +40,15 @@ public class Profile : MonoBehaviour {
 		stringObjectXPTextHashTable = new Hashtable ();
 
 		// Determines the screensize we will need to scale the UI elements.
-//		Camera camera = Camera.main;
+		Camera camera = Camera.main;
 		orthographicScreenHeight = Camera.main.orthographicSize * 2;
 		orthographicScreenWidth = orthographicScreenHeight * Screen.width / Screen.height;
+
+		// Set up the Title Object:
+		generateDimensionTitle ();
+
+		// Set up the User's metadata at the top of the Profile Scene
+		generateUserProfile();
 
 		// Generate the Dimension-Filter Toolbar:
 		generateDimensionToolbarButton (0.5f, IAButtonSprite, "IA");
@@ -67,6 +76,74 @@ public class Profile : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		delegateNavigationFromTouch ();
+	}
+
+	// Generates the Dimension Title Object:
+	private void generateDimensionTitle () {
+		Camera camera = Camera.main;
+
+		dimensionTitleObject = new GameObject ();
+		dimensionTitleObject.name = "Dimension Title";
+		Vector3 dimensionTitleLoc = new Vector3 (0.50f, 0.65f, 10.0f);
+		dimensionTitleObject.transform.position = camera.ViewportToWorldPoint (dimensionTitleLoc);
+		dimensionTitleObject.AddComponent<TextMesh> ();
+		TextMesh dimensionTitleObjectTextMesh = dimensionTitleObject.GetComponent<TextMesh> ();
+		dimensionTitleObjectTextMesh.anchor = TextAnchor.MiddleCenter;
+		dimensionTitleObjectTextMesh.characterSize = .025f;
+		dimensionTitleObjectTextMesh.color = Color.black;
+		dimensionTitleObjectTextMesh.fontSize = 175;
+		dimensionTitleObject.GetComponent<MeshRenderer> ().sortingOrder = 4;
+	}
+
+	// Updates the Dimension Title Object to show the correct Dimension Title:
+	private void updateDimensionTitle (string title) {
+		TextMesh dimensionTitleObjectTextMesh = dimensionTitleObject.GetComponent<TextMesh> ();
+		dimensionTitleObjectTextMesh.text = title;
+	}
+
+	// Generates the User's metadata at the top of the Profile Scene:
+	private void generateUserProfile () {
+		Camera camera = Camera.main;
+
+		// Create the Objects for Username, Major, Year, and TotalEXP:
+		GameObject userNameObject = new GameObject ();
+		userNameObject.name = "Username";
+		Vector3 userNameObjectLoc = new Vector3 (0.50f, 0.85f, 10.0f);
+		userNameObject.transform.position = camera.ViewportToWorldPoint (userNameObjectLoc);
+		userNameObject.AddComponent<TextMesh> ();
+		TextMesh userNameObjectTextMesh = userNameObject.GetComponent<TextMesh> ();
+		userNameObjectTextMesh.text = AppController.appController.getUsername ();
+		userNameObjectTextMesh.anchor = TextAnchor.MiddleCenter;
+		userNameObjectTextMesh.characterSize = .025f;
+		userNameObjectTextMesh.color = Color.black;
+		userNameObjectTextMesh.fontSize = 250;
+		userNameObject.GetComponent<MeshRenderer> ().sortingOrder = 4;
+
+		GameObject userMajorObject = new GameObject ();
+		userMajorObject.name = "Major";
+		Vector3 userMajorObjectLoc = new Vector3 (0.250f, 0.75f, 10.0f);
+		userMajorObject.transform.position = camera.ViewportToWorldPoint (userMajorObjectLoc);
+		userMajorObject.AddComponent<TextMesh> ();
+		TextMesh userMajorObjectTextMesh = userMajorObject.GetComponent<TextMesh> ();
+		userMajorObjectTextMesh.text = "Major:\n" + AppController.appController.getMajor ();
+		userMajorObjectTextMesh.anchor = TextAnchor.MiddleCenter;
+		userMajorObjectTextMesh.characterSize = .025f;
+		userMajorObjectTextMesh.color = Color.gray;
+		userMajorObjectTextMesh.fontSize = 125;
+		userMajorObject.GetComponent<MeshRenderer> ().sortingOrder = 4;
+
+		GameObject userYearObject = new GameObject ();
+		userYearObject.name = "Year";
+		Vector3 userYearObjectLoc = new Vector3 (0.75f, 0.75f, 10.0f);
+		userYearObject.transform.position = camera.ViewportToWorldPoint (userYearObjectLoc);
+		userYearObject.AddComponent<TextMesh> ();
+		TextMesh userYearObjectTextMesh = userYearObject.GetComponent<TextMesh> ();
+		userYearObjectTextMesh.text = "Year:\n" + AppController.appController.getYear ().ToString ();
+		userYearObjectTextMesh.anchor = TextAnchor.MiddleCenter;
+		userYearObjectTextMesh.characterSize = .025f;
+		userYearObjectTextMesh.color = Color.gray;
+		userYearObjectTextMesh.fontSize = 125;
+		userYearObject.GetComponent<MeshRenderer> ().sortingOrder = 4;
 	}
 
 	// Method to generate a Dimension-Filter Toolbar Button
@@ -242,6 +319,8 @@ public class Profile : MonoBehaviour {
 				// Hide all, show the correct XP Text:
 				hideAllXPTexts();
 				showXPText("IA");
+				// Update Dimension Title Object:
+				updateDimensionTitle ("Intellectual Agility");
 			}
 
 			GameObject tempGA = (GameObject)stringObjectDimensionFiltersHashTable["GA"];
@@ -253,6 +332,8 @@ public class Profile : MonoBehaviour {
 				// Hide all, show the correct XP Text:
 				hideAllXPTexts();
 				showXPText("GA");
+				// Update Dimension Title Object:
+				updateDimensionTitle ("Global Awareness");
 			}
 
 			GameObject tempSC = (GameObject)stringObjectDimensionFiltersHashTable["SC"];
@@ -264,6 +345,8 @@ public class Profile : MonoBehaviour {
 				// Hide all, show the correct XP Text:
 				hideAllXPTexts();
 				showXPText("SC");
+				// Update Dimension Title Object:
+				updateDimensionTitle ("Social Consciousness");
 			}
 
 			GameObject tempPP = (GameObject)stringObjectDimensionFiltersHashTable["PP"];
@@ -275,6 +358,8 @@ public class Profile : MonoBehaviour {
 				// Hide all, show the correct XP Text:
 				hideAllXPTexts();
 				showXPText("PP");
+				// Update Dimension Title Object:
+				updateDimensionTitle ("Personal/Professional\nWellbeing");
 			}
 
 			GameObject tempWB = (GameObject)stringObjectDimensionFiltersHashTable["WB"];
@@ -286,6 +371,8 @@ public class Profile : MonoBehaviour {
 				// Hide all, show the correct XP Text:
 				hideAllXPTexts();
 				showXPText("WB");
+				// Update Dimension Title Object:
+				updateDimensionTitle ("Well Being");
 			}
 		}
 	}
