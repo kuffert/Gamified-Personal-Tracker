@@ -85,6 +85,50 @@ NavMeshSettings:
     cellSize: .166666672
     manualCellSize: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &116854501
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 116854503}
+  - 114: {fileID: 116854502}
+  m_Layer: 0
+  m_Name: Settings
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &116854502
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 116854501}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58d973a14b2f844208ed5a4d682535de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  userNameUpdateSprite: {fileID: 21300000, guid: 904997cbf939c44b28c01dbaa24e96b2,
+    type: 3}
+  userMajorUpdateSprite: {fileID: 21300000, guid: b7cfec9c55d6442f98da7b63df1b20c2,
+    type: 3}
+  userLogOutSprite: {fileID: 21300000, guid: 4de434cbe5ab2421eb970a38ac97687c, type: 3}
+--- !u!4 &116854503
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 116854501}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
 --- !u!1 &575471274
 GameObject:
   m_ObjectHideFlags: 0
@@ -207,6 +251,7 @@ MonoBehaviour:
   profileIcon: {fileID: 21300000, guid: d5f0c1fe7da2543e685ad6a3a30cf702, type: 3}
   taskbar: {fileID: 21300000, guid: 0c2258e02faa24163887200f7097ff3b, type: 3}
   currentScreenText: Settings
+  currentScreenTextSize: 200
   numberOfButtons: 4
   taskbarFractionOfScreen: 10
   font: {fileID: 12800000, guid: 39c3d5648da8c4e248c24456ee09df37, type: 3}

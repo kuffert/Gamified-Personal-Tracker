@@ -10,9 +10,9 @@ public class Login : MonoBehaviour {
 	private GUIStyle labelStyle = new GUIStyle ();
 
 	// TextField Strings:
-	private string userNameString = "Username";
-	private string userPasswordString = "Password";
-	private string userMajorString = "Major";
+	private string userNameString = string.Empty;
+	private string userPasswordString = string.Empty;
+	private string userMajorString = string.Empty;
 
 	// Window for GUI:
 	private Rect windowRect = new Rect(0, 0, Screen.width, Screen.height);
@@ -20,6 +20,8 @@ public class Login : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		AppController.appController.Load ();
+		userNameString = AppController.appController.getUsername ();
+		userMajorString = AppController.appController.getMajor ();
         if (AppController.appController.getLoggedIn())
         {
             Application.LoadLevel("Profile");
@@ -46,9 +48,9 @@ public class Login : MonoBehaviour {
 		GUI.Label (new Rect (Screen.width / 4, 3.15f * Screen.height / 5f, Screen.width / 2, Screen.height / 10), "Choose a Year:", labelStyle);
 
 		// TextFields:
-		userNameString		= GUI.TextField(new Rect(Screen.width/3, 0.5f * Screen.height/5f, Screen.width/3, Screen.height/10), userNameString, 20);
-		userPasswordString	= GUI.PasswordField(new Rect(Screen.width/3, 1.5f * Screen.height/5, Screen.width/3, Screen.height/10), userPasswordString, "*"[0], 10);
-		userMajorString		= GUI.TextField(new Rect(Screen.width/3, 2.5f * Screen.height/5f, Screen.width/3, Screen.height/10), userMajorString, 50);
+		userNameString = GUI.TextField(new Rect(Screen.width/3, 0.5f * Screen.height/5f, Screen.width/3, Screen.height/10), userNameString, 20);
+		userPasswordString = GUI.PasswordField(new Rect(Screen.width/3, 1.5f * Screen.height/5, Screen.width/3, Screen.height/10), userPasswordString, "*"[0], 10);
+		userMajorString = GUI.TextField(new Rect(Screen.width/3, 2.5f * Screen.height/5f, Screen.width/3, Screen.height/10), userMajorString, 50);
 
 		// Buttons for Year:
 		for (int i = 0; i < 5; i++) {
