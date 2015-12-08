@@ -91,6 +91,24 @@ public class Testing : MonoBehaviour {
         outputTestResult(testEXP.totals.TryGetValue("Personal Professional Experience", out temp));
         outputTestResult(testEXP.totals.TryGetValue("Well Being", out temp));
 
+		// TESTS FOR THE LOGIN SCENE //
+		// Author: Jack Kelly
+		// Date: 12/6/15
+
+		// 1) Test Get/SET Major
+		AppController.appController.setMajor("testMajor");
+		AppController.appController.Save();
+		AppController.appController.Load();
+		string userMajorFromLocal = AppController.appController.getUsername();
+		outputTestResult(userMajorFromLocal.Equals("testMajor"));
+
+		// 2) Test Get/SET Year
+		AppController.appController.setYear(1234);
+		AppController.appController.Save();
+		AppController.appController.Load();
+		int userYearFromLocal = AppController.appController.getYear();
+		outputTestResult(userYearFromLocal == 1234);
+
         outputFinalResult();
 	}
 
