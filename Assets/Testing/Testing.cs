@@ -71,7 +71,7 @@ public class Testing : MonoBehaviour {
         outputTestResult(opportunities.First().AcademicStanding != null);
         outputTestResult(opportunities.First().Skills != null);
 
-        // 17 - 21 
+        // 17 - 20
         // Test Skills
         Skill skill = skills.Find(item => item.SkillName == "Advocacy");
 
@@ -79,6 +79,17 @@ public class Testing : MonoBehaviour {
         outputTestResult(skill.Dimensions.Contains("Social Consciousness & Interpersonal Commitment"));
         outputTestResult(skill.Dimensions.Length == 1);
         outputTestResult(skill.Id == "563f9e95c58aed0304213e5b");
+
+        // TESTS FOR THE EXPERIENCE CLASS //
+        // 21 - 26
+        Experience testEXP = Experience.DefaultExperience();
+        int temp = 0;
+        outputTestResult(testEXP.totals.Values.Count == 5);
+        outputTestResult(testEXP.totals.TryGetValue("Intellectual Agility", out temp));
+        outputTestResult(testEXP.totals.TryGetValue("Global Awareness", out temp));
+        outputTestResult(testEXP.totals.TryGetValue("Social Conciousness", out temp));
+        outputTestResult(testEXP.totals.TryGetValue("Personal Professional Experience", out temp));
+        outputTestResult(testEXP.totals.TryGetValue("Well Being", out temp));
 
         outputFinalResult();
 	}

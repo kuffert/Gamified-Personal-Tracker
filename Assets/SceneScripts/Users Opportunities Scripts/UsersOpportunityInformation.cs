@@ -71,15 +71,19 @@ public class UsersOpportunityInformation : UsersOpportunities {
 
         toAdd.totals.TryGetValue("Intellectual Agility", out add);
         AppController.appController.setIAExp(AppController.appController.getIAExp() + add);
+        add = 0;
 
         toAdd.totals.TryGetValue("Global Awareness", out add);
         AppController.appController.setGAExp(AppController.appController.getGAExp() + add);
+        add = 0;
 
         toAdd.totals.TryGetValue("Social Conciousness", out add);
         AppController.appController.setSCExp(AppController.appController.getSCExp() + add);
+        add = 0;
 
         toAdd.totals.TryGetValue("Personal Professional Experience", out add);
         AppController.appController.setPPExp(AppController.appController.getPPExp() + add);
+        add = 0;
 
         toAdd.totals.TryGetValue("Well Being", out add);
         AppController.appController.setWBExp(AppController.appController.getWBExp() + add);

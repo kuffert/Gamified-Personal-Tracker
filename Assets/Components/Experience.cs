@@ -38,10 +38,11 @@ public class Experience {
     public static Experience DefaultExperience()
     {
         Experience e = new Experience();
-        foreach (int dimension in Enum.GetValues(typeof(Dimension))) {
-            e.add(Enum.GetName(typeof(Dimension), dimension), 0);
+        foreach (int value in Enum.GetValues(typeof(Dimension)))
+        {
+            e.add(((Dimension)value).GetDescription(), 0);
         }
 
-        return new Experience();
+        return e;
     }
 }
