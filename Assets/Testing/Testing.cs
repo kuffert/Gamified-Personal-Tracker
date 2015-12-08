@@ -55,7 +55,6 @@ public class Testing : MonoBehaviour {
         // TESTS FOR THE OPPORTUNITY CONTROLLER //
         // Author: Yvette Kim
         // Date: 12/2/15
-
         List<Opportunity> opportunities = OpportunityController.getOpportunities();
         List<Skill> skills = OpportunityController.getSkills();
 
@@ -79,6 +78,24 @@ public class Testing : MonoBehaviour {
         outputTestResult(skill.Dimensions.Contains("Social Consciousness & Interpersonal Commitment"));
         outputTestResult(skill.Dimensions.Length == 1);
         outputTestResult(skill.Id == "563f9e95c58aed0304213e5b");
+
+		// TESTS FOR THE LOGIN SCENE //
+		// Author: Jack Kelly
+		// Date: 12/6/15
+
+		// 1) Test Get/SET Major
+		AppController.appController.setMajor("testMajor");
+		AppController.appController.Save();
+		AppController.appController.Load();
+		string userMajorFromLocal = AppController.appController.getUsername();
+		outputTestResult(userMajorFromLocal.Equals("testMajor"));
+
+		// 2) Test Get/SET Year
+		AppController.appController.setYear(1234);
+		AppController.appController.Save();
+		AppController.appController.Load();
+		int userYearFromLocal = AppController.appController.getYear();
+		outputTestResult(userYearFromLocal == 1234);
 
         outputFinalResult();
 	}
