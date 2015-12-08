@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+// Author: Jack Kelly
 public class Settings : MonoBehaviour {
 	
 	// Label GUIStyle:
@@ -40,10 +41,12 @@ public class Settings : MonoBehaviour {
 		orthographicScreenWidth = orthographicScreenHeight * Screen.width / Screen.height;
 		
 		labelStyleText.alignment = TextAnchor.MiddleLeft;
+		labelStyleText.normal.textColor = Color.white;
 		labelStyleText.fontSize = Screen.width / 15;
 
         labelStyleInput.alignment = TextAnchor.MiddleLeft;
-        labelStyleInput.fontSize = Screen.width / 20;
+		labelStyleInput.normal.textColor = Color.red;
+        labelStyleInput.fontSize = Screen.width / 18;
 		
 		// Generate Objects to update Uses's Name, Major, and to Logout:
 		generateSettingsObjects (userNameUpdateSprite, userMajorUpdateSprite, userLogOutSprite);
@@ -76,7 +79,7 @@ public class Settings : MonoBehaviour {
 		// Generate the User's Update Major Button:
 		userMajorUpdateObject = new GameObject ();
 		userMajorUpdateObject.name = "Update UserMajor Button";
-		Vector3 updateMajorLoc = new Vector3 (0.8f, .55f, 10);
+		Vector3 updateMajorLoc = new Vector3 (0.8f, .6f, 10);
 		userMajorUpdateObject.transform.position = camera.ViewportToWorldPoint(updateMajorLoc);
 		userMajorUpdateObject.AddComponent<SpriteRenderer> ();
 		SpriteRenderer userMajorUpdateSpriteRenderer = userMajorUpdateObject.GetComponent<SpriteRenderer> ();
@@ -106,8 +109,8 @@ public class Settings : MonoBehaviour {
 	
 		void OnGUI () {
 			// Labels:
-			GUI.Label (new Rect (Screen.width/8, 0.35f * Screen.height / 5, Screen.width / 2, Screen.height / 10),enterUserNameString, labelStyleText);
-			GUI.Label (new Rect (Screen.width/8, 1.550f * Screen.height / 5, Screen.width / 2, Screen.height / 10), enterMajorString, labelStyleText);
+			GUI.Label (new Rect (Screen.width/8, 0.4f * Screen.height / 5, Screen.width / 2, Screen.height / 10),enterUserNameString, labelStyleText);
+			GUI.Label (new Rect (Screen.width/8, 1.6f * Screen.height / 5, Screen.width / 2, Screen.height / 10), enterMajorString, labelStyleText);
 	
 			// TextFields:
 			userNameString = GUI.TextField(new Rect(Screen.width/8, 0.75f * Screen.height/5f, Screen.width/2.5f, Screen.height/10), userNameString, 20, labelStyleInput);
