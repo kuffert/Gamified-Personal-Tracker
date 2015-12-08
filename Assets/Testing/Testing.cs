@@ -87,9 +87,9 @@ public class Testing : MonoBehaviour {
         outputTestResult(testEXP.totals.Values.Count == 5);
         outputTestResult(testEXP.totals.TryGetValue("Intellectual Agility", out temp));
         outputTestResult(testEXP.totals.TryGetValue("Global Awareness", out temp));
-        outputTestResult(testEXP.totals.TryGetValue("Social Conciousness", out temp));
-        outputTestResult(testEXP.totals.TryGetValue("Personal Professional Experience", out temp));
-        outputTestResult(testEXP.totals.TryGetValue("Well Being", out temp));
+        outputTestResult(testEXP.totals.TryGetValue("Social Consciousness & Interpersonal Commitment", out temp));
+        outputTestResult(testEXP.totals.TryGetValue("Professional and Personal Effectiveness", out temp));
+        outputTestResult(testEXP.totals.TryGetValue("Well-Being", out temp));
 
 		// TESTS FOR THE LOGIN SCENE //
 		// Author: Jack Kelly

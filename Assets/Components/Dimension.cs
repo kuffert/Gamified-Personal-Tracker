@@ -9,10 +9,10 @@ public enum Dimension {
     IntellectualAgility,
     [Description("Global Awareness")]
     GlobalAwareness,
-    [Description("Social Conciousness")]
+    [Description("Social Consciousness & Interpersonal Commitment")]
     SocialConciousness,
-    [Description("Personal Professional Experience")]
+    [Description("Professional and Personal Effectiveness")]
     PersonalProfessionalExperience,
-    [Description("Well Being")]
+    [Description("Well-Being")]
     WellBeing
 }
