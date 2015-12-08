@@ -33,7 +33,8 @@ public class Profile : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		// Initializations:
+        // Initializations:
+        AppController.appController.Save();
 		AppController.appController.Load ();
 		stringObjectDimensionFiltersHashTable = new Hashtable ();
 		stringObjectXPBubbleHashTable = new Hashtable ();

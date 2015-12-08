@@ -17,6 +17,12 @@ public class OpportunityController: MonoBehaviour {
     
     public int numberOfDisplayedOpportunities;
     public Sprite buttonSprite;
+    public Sprite searchBarSprite;
+    public Sprite IASprite;
+    public Sprite GASprite;
+    public Sprite SCSprite;
+    public Sprite PPESprite;
+    public Sprite WBSprite;
     protected int numberOfVisibleCharacters = 33;
     protected List<GameObject> opportunityButtonObjects = new List<GameObject>();
     protected List<GameObject> opportunityTextObjects = new List<GameObject>();
@@ -149,12 +155,23 @@ public class OpportunityController: MonoBehaviour {
 		return result;
 	}
 
+    // Generates a static searchbar
+    public void generateSearchbar()
+    {
+        GameObject searchBar = new GameObject();
+        searchBar.AddComponent<SpriteRenderer>().sprite = searchBarSprite;
+        searchBar.GetComponent<SpriteRenderer>().sortingOrder = 6;
+        searchBar.transform.position = Camera.main.ViewportToWorldPoint(new Vector3(.5f, 1f - ApplicationView.applicationView.getTaskbarFractionOfScreen() / 100f - .03f, 10f));
+        float searchbarWidth = ApplicationView.calculateSpriteUnitWidth(buttonSprite);
+        searchBar.transform.localScale = new Vector3(ApplicationView.orthographicScreenWidth / searchbarWidth, .5f, 1f);
+    }
+
     // Generates an a text object and an interactable button to allow navigation when an opportunity is selected.
     public void generateOpportunity(int opportunityNumber, Opportunity opportunity, int numberOfVisibleCharacters, float fractionOfScreenPerOpportunity)
     {
         float newOpportunitySpriteWidth = ApplicationView.calculateSpriteUnitWidth(buttonSprite);
         float newOpportunitySpriteHeight = ApplicationView.calculateSpriteUnitHeight(buttonSprite);
-        float opportunityPositionY = 1f - (ApplicationView.applicationView.getTaskbarFractionOfScreen() / 100f + opportunityNumber * fractionOfScreenPerOpportunity) - .043f;
+        float opportunityPositionY = 1f - (ApplicationView.applicationView.getTaskbarFractionOfScreen() / 100f + opportunityNumber * fractionOfScreenPerOpportunity) - .1f;
 
         GameObject newOpportunityText = new GameObject();
         newOpportunityText.AddComponent<TextMesh>();
@@ -331,5 +348,59 @@ public class OpportunityController: MonoBehaviour {
         metaDataNavigationButton.AddComponent<BoxCollider>();
 
         return metaDataNavigationButton;
+    }
+
+
+    // generate the Dimensions sprites depending on what dimensions the skills in this
+    // Opportunity apply to.
+    protected void generateDimensionSprites(Opportunity opportunity)
+    {
+        Experience oppExperience = opportunity.EXP();
+        float dimensionXLoc = .2f;
+        int value = 0;
+
+        oppExperience.totals.TryGetValue(((Dimension)0).GetDescription(), out value);
+        if (value > 0)
+        {
+            generateDimensionObject(IASprite, dimensionXLoc);
+            dimensionXLoc += .15f;
+        }
+
+        oppExperience.totals.TryGetValue(((Dimension)1).GetDescription(), out value);
+        if (value > 0)
+        {
+            generateDimensionObject(GASprite, dimensionXLoc);
+            dimensionXLoc += .15f;
+        }
+
+        oppExperience.totals.TryGetValue(((Dimension)2).GetDescription(), out value);
+        if (value > 0)
+        {
+            generateDimensionObject(SCSprite, dimensionXLoc);
+            dimensionXLoc += .15f;
+        }
+
+        oppExperience.totals.TryGetValue(((Dimension)3).GetDescription(), out value);
+        if (value > 0)
+        {
+            generateDimensionObject(PPESprite, dimensionXLoc);
+            dimensionXLoc += .15f;
+        }
+
+        oppExperience.totals.TryGetValue(((Dimension)4).GetDescription(), out value);
+        if (value > 0)
+        {
+            generateDimensionObject(WBSprite, dimensionXLoc);
+        }
+    }
+
+    // generate dimension object 
+    private void generateDimensionObject(Sprite dimensionSprite, float xLoc)
+    {
+        GameObject dimensionObject = new GameObject();
+        dimensionObject.AddComponent<SpriteRenderer>().sprite = dimensionSprite;
+        dimensionObject.GetComponent<SpriteRenderer>().sortingOrder = 4;
+        dimensionObject.transform.position = Camera.main.ViewportToWorldPoint(new Vector3(xLoc, .25f, 10f));
+        dimensionObject.transform.localScale = new Vector3(.5f, .5f, 1f);
     }
 }

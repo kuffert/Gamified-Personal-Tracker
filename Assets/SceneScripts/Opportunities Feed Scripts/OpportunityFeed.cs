@@ -11,6 +11,8 @@ public class OpportunityFeed : OpportunityController {
 		saveAllOpportunitiesToLocalFile();
 		AppController.appController.Load();
 		List<Opportunity> usersOpportunities = AppController.appController.getAllOpportunities();
+
+        generateSearchbar();
 		
 		float fractionOfScreenPerOpportunity = (1 - (2 * ApplicationView.applicationView.getTaskbarFractionOfScreen() / 100f)) / numberOfDisplayedOpportunities;
 		

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+// Author: Jack Kelly
 public class Login : MonoBehaviour {
 
 	// The ultimate login checker:
@@ -37,7 +38,7 @@ public class Login : MonoBehaviour {
 		fieldStyle.alignment = TextAnchor.MiddleCenter;
 		fieldStyle.fontSize = Screen.width / 12;
 		fieldStyle.normal.textColor = Color.red;
-		yearButtonStyle.fontSize = Screen.width / 14;
+		yearButtonStyle.fontSize = Screen.width / 16;
 		yearButtonStyle.normal.textColor = Color.red;
 	}
 	
@@ -66,10 +67,10 @@ public class Login : MonoBehaviour {
             userMajorString = GUI.TextField(new Rect(Screen.width / 3, 2.5f * Screen.height / 5f, Screen.width / 3, Screen.height / 10), userMajorString, 50, fieldStyle);
 
             // Buttons for Year:
-            for (int i = 1; i < 6; i++)
+            for (int i = 0; i < 5; i++)
             {
                 string yearString = (i + 2017).ToString();
-                if (GUI.Button(new Rect(((float)i * Screen.width / 5f) - 55, 3.5f * Screen.height / 5f, Screen.width / 4, Screen.height / 12), yearString, yearButtonStyle))
+                if (GUI.Button(new Rect(((float)i * Screen.width / 5f) + Screen.width /25, 3.5f * Screen.height / 5f, Screen.width / 4, Screen.height / 12), yearString, yearButtonStyle))
                 {
                     Debug.Log(yearString);
 					yearButtonStyle.normal.textColor = Color.white;

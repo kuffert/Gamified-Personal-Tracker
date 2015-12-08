@@ -19,6 +19,8 @@ public class UsersOpportunityInformation : UsersOpportunities {
 
         displayOpportunityMetadata(opportunity);
 
+        generateDimensionSprites(opportunity);
+
         generateTextOverlay(.17f, "Complete");
         completeTextButton = generateMetaDataNavigationButton(.17f, 3);
 

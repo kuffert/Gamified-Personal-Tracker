@@ -11,6 +11,8 @@ public class UsersOpportunities : OpportunityController {
         AppController.appController.Load();
         List<Opportunity> usersOpportunities = AppController.appController.getUsersSelectedOpportunities();
 
+        generateSearchbar();
+
         float fractionOfScreenPerOpportunity = (1 - (2 * ApplicationView.applicationView.getTaskbarFractionOfScreen() / 100f)) / numberOfDisplayedOpportunities;
 
         for (int i = 0; i < usersOpportunities.Count && i < numberOfDisplayedOpportunities; i++)

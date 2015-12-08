@@ -19,6 +19,8 @@ public class OpportunityInformation : OpportunityFeed {
 
         displayOpportunityMetadata(opportunity);
 
+        generateDimensionSprites(opportunity);
+
         GameObject acceptText = generateTextOverlay(.25f, "Accept");
         acceptTextButton = generateMetaDataNavigationButton(.25f, 2);
 

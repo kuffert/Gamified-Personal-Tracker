@@ -97,6 +97,8 @@ public class ApplicationView : MonoBehaviour {
 	
     // Anything in here will be run every tick.
 	void Update () {
+        sceneText.GetComponent<TextMesh>().text = currentScreenText;
+        sceneText.GetComponent<TextMesh>().fontSize = currentScreenTextSize;
         delegateNavigationFromTouch();
     }
 

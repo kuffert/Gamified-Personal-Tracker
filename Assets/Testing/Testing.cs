@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-// Authors: Chris Kuffert, Craig Hammond, John Kelly, Yvette Kim, Zhenhuan Wu
+// Authors: Chris Kuffert, Craig Hammond, John Kelly, Yvette Kim
 public class Testing : MonoBehaviour {
 
     public bool showAllTestOutputs;
@@ -31,11 +31,22 @@ public class Testing : MonoBehaviour {
         string usernameFromLocal = AppController.appController.getUsername();
         outputTestResult(usernameFromLocal.Equals("testUsername"));
 
+        // 4. Testing logging in being saved
+        AppController.appController.setLoggedIn(true);
+        AppController.appController.Save();
+        AppController.appController.Load();
+        outputTestResult(AppController.appController.getLoggedIn());
+
+        // 5. Testing creating an account being saved
+        AppController.appController.setCreatedAccount(true);
+        AppController.appController.Save();
+        AppController.appController.Load();
+        outputTestResult(AppController.appController.getCreatedAccount());
 
         // TESTS FOR THE APPLICATION VIEW //
         // Author: Chris Kuffert
         // Date: 12/1/15
-        // 4 - 11
+        // 6 - 13
         // NOTE: As this is the script for displaying components, 
         // these tests will determine whether the components were 
         // indeed created successfully. Upon application start,
@@ -59,19 +70,19 @@ public class Testing : MonoBehaviour {
         List<Opportunity> opportunities = OpportunityController.getOpportunities();
         List<Skill> skills = OpportunityController.getSkills();
 
-        // 12. Test getting opportunities from db
+        // 14. Test getting opportunities from db
         outputTestResult(opportunities != null);
 
-        // 13. Test getting skills from db, should be exactly 50 at all times
+        // 15. Test getting skills from db, should be exactly 50 at all times
         outputTestResult(skills.Count == 50);
 
-        // 14 - 16 
+        // 15 - 18 
         // Spot test opportunity mapping for string, string[], List<Skill>
         outputTestResult(opportunities.First().Id != null);
         outputTestResult(opportunities.First().AcademicStanding != null);
         outputTestResult(opportunities.First().Skills != null);
 
-        // 17 - 20
+        // 19 - 22
         // Test Skills
         Skill skill = skills.Find(item => item.SkillName == "Advocacy");
 
@@ -81,7 +92,7 @@ public class Testing : MonoBehaviour {
         outputTestResult(skill.Id == "563f9e95c58aed0304213e5b");
 
         // TESTS FOR THE EXPERIENCE CLASS //
-        // 21 - 26
+        // 23 - 28
         Experience testEXP = Experience.DefaultExperience();
         int temp = 0;
         outputTestResult(testEXP.totals.Values.Count == 5);
@@ -95,14 +106,14 @@ public class Testing : MonoBehaviour {
 		// Author: Jack Kelly
 		// Date: 12/6/15
 
-		// 1) Test Get/SET Major
+		// 29) Test Get/SET Major
 		AppController.appController.setMajor("testMajor");
 		AppController.appController.Save();
 		AppController.appController.Load();
-		string userMajorFromLocal = AppController.appController.getUsername();
+		string userMajorFromLocal = AppController.appController.getMajor();
 		outputTestResult(userMajorFromLocal.Equals("testMajor"));
 
-		// 2) Test Get/SET Year
+		// 30) Test Get/SET Year
 		AppController.appController.setYear(1234);
 		AppController.appController.Save();
 		AppController.appController.Load();
@@ -132,6 +143,8 @@ public class Testing : MonoBehaviour {
         AppController.appController.Load();
         AppController.appController.setUsername(null);
         AppController.appController.setMajor(null);
+        AppController.appController.setLoggedIn(false);
+        AppController.appController.setCreatedAccount(false);
         AppController.appController.setYear(0);
         AppController.appController.setIAExp(0);
         AppController.appController.setGAExp(0);
