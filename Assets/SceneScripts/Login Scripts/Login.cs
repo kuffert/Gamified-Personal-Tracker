@@ -20,6 +20,10 @@ public class Login : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		AppController.appController.Load ();
+        if (AppController.appController.getLoggedIn())
+        {
+            Application.LoadLevel("Profile");
+        }
 		labelStyle.alignment = TextAnchor.MiddleCenter;
 		labelStyle.fontSize = 16;
 	}
@@ -65,6 +69,8 @@ public class Login : MonoBehaviour {
 				AppController.appController.setMajor (userMajorString);
 				AppController.appController.Save ();
 				Debug.Log ("Setting Data and Logging In...");
+                AppController.appController.setLoggedIn(true);
+                AppController.appController.Save();
 				Application.LoadLevel ("Profile");
 			}
 			else {
