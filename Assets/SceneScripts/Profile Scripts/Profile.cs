@@ -40,7 +40,6 @@ public class Profile : MonoBehaviour {
 		stringObjectXPTextHashTable = new Hashtable ();
 
 		// Determines the screensize we will need to scale the UI elements.
-		Camera camera = Camera.main;
 		orthographicScreenHeight = Camera.main.orthographicSize * 2;
 		orthographicScreenWidth = orthographicScreenHeight * Screen.width / Screen.height;
 
@@ -70,7 +69,6 @@ public class Profile : MonoBehaviour {
 		generateXPTextObject (AppController.appController.getSCExp(), "SC");
 		generateXPTextObject (AppController.appController.getPPExp(), "PP");
 		generateXPTextObject (AppController.appController.getWBExp(), "WB");
-
 	}
 	
 	// Update is called once per frame
@@ -359,7 +357,7 @@ public class Profile : MonoBehaviour {
 				hideAllXPTexts();
 				showXPText("PP");
 				// Update Dimension Title Object:
-				updateDimensionTitle ("Personal/Professional\nWellbeing");
+				updateDimensionTitle ("Personal/Professional\nEffectiveness");
 			}
 
 			GameObject tempWB = (GameObject)stringObjectDimensionFiltersHashTable["WB"];

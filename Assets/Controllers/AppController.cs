@@ -14,6 +14,7 @@ public class AppController : MonoBehaviour {
 	string major;
 	int year;
     bool loggedIn;
+    bool createdAccount;
 
 	int IAExp;
 	int GAExp;
@@ -36,6 +37,7 @@ public class AppController : MonoBehaviour {
     public string getMajor() { return major; }
     public int getYear() { return year; }
     public bool getLoggedIn() { return loggedIn; }
+    public bool getCreatedAccount() { return createdAccount; }
     public int getIAExp() { return IAExp; }
     public int getGAExp() { return GAExp; }
     public int getSCExp() { return SCExp; }
@@ -54,6 +56,7 @@ public class AppController : MonoBehaviour {
     public void setMajor(string major) { this.major = major; }
     public void setYear(int year) { this.year = year; }
     public void setLoggedIn(bool loggedIn) { this.loggedIn = loggedIn; }
+    public void setCreatedAccount(bool createdAccount) { this.createdAccount = createdAccount; }
     public void setIAExp(int exp) { this.IAExp = exp; }
     public void setGAExp(int exp) { this.GAExp = exp; }
     public void setSCExp(int exp) { this.SCExp = exp; }
@@ -115,6 +118,7 @@ public class AppController : MonoBehaviour {
 		private string major;
 		private int year;
         private bool loggedIn;
+        private bool createdAccount;
 		
 		private int IAExp;
 		private int GAExp;
@@ -135,12 +139,15 @@ public class AppController : MonoBehaviour {
 
         public UserData() {
 			allOpportunities = new List<Opportunity>();
+            usersSelectedOpportunities = new List<Opportunity>();
+            usersCompletedOpportunities = new List<Opportunity>();
 		}
 
         string getUsername() { return username; }
         string getMajor() { return major; }
         int getYear() { return year; }
-         bool getLoggedIn() { return loggedIn; }
+        bool getLoggedIn() { return loggedIn; }
+        bool getCreatedAccount() { return createdAccount; }
         int getIAExp() { return IAExp; }
         int getGAExp() { return GAExp; }
         int getSCExp() { return SCExp; }
@@ -159,6 +166,7 @@ public class AppController : MonoBehaviour {
         void setMajor(string major) { this.major = major; }
         void setYear(int year) { this.year = year; }
         void setLoggedIn(bool loggedIn) { this.loggedIn = loggedIn; }
+        void setCreatedAccount(bool createdAccount) { this.createdAccount = createdAccount; }
         void setIAExp(int exp) { this.IAExp = exp; }
         void setGAExp(int exp) { this.GAExp = exp; }
         void setSCExp(int exp) { this.SCExp = exp; }
@@ -179,6 +187,7 @@ public class AppController : MonoBehaviour {
             setMajor(appController.getMajor());
             setYear(appController.getYear());
             setLoggedIn(appController.getLoggedIn());
+            setCreatedAccount(appController.getCreatedAccount());
             setIAExp(appController.getIAExp());
             setGAExp(appController.getGAExp());
             setSCExp(appController.getSCExp());
@@ -200,6 +209,7 @@ public class AppController : MonoBehaviour {
             appController.setMajor(getMajor());
             appController.setYear(getYear());
             appController.setLoggedIn(getLoggedIn());
+            appController.setCreatedAccount(getCreatedAccount());
             appController.setIAExp(getIAExp());
             appController.setGAExp(getGAExp());
             appController.setSCExp(getSCExp());

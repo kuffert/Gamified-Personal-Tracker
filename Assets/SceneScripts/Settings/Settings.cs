@@ -4,11 +4,16 @@ using System.Collections;
 public class Settings : MonoBehaviour {
 	
 	// Label GUIStyle:
-	private GUIStyle labelStyle = new GUIStyle ();
+	private GUIStyle labelStyleText = new GUIStyle ();
+    private GUIStyle labelStyleInput = new GUIStyle();
 	
 	// TextField Strings:
 	private string userNameString = string.Empty;
 	private string userMajorString = string.Empty;
+
+    // Text Strings:
+    private string enterUserNameString = string.Empty;
+    private string enterMajorString = string.Empty;
 	
 	// Button Sprites:
 	public Sprite userNameUpdateSprite;
@@ -27,14 +32,18 @@ public class Settings : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		AppController.appController.Load ();
-		Camera camera = Camera.main;
-		userNameString = AppController.appController.getUsername ();
-		userMajorString = AppController.appController.getMajor ();
-		orthographicScreenHeight = Camera.main.orthographicSize * 2;
+		userNameString = AppController.appController.getUsername () == null? "" : AppController.appController.getUsername();
+		userMajorString = AppController.appController.getMajor () == null? "" : AppController.appController.getMajor();
+        enterUserNameString = "Update Username";
+        enterMajorString = "Update Major";
+        orthographicScreenHeight = Camera.main.orthographicSize * 2;
 		orthographicScreenWidth = orthographicScreenHeight * Screen.width / Screen.height;
 		
-		labelStyle.alignment = TextAnchor.MiddleLeft;
-		labelStyle.fontSize = 16;
+		labelStyleText.alignment = TextAnchor.MiddleLeft;
+		labelStyleText.fontSize = Screen.width / 15;
+
+        labelStyleInput.alignment = TextAnchor.MiddleLeft;
+        labelStyleInput.fontSize = Screen.width / 20;
 		
 		// Generate Objects to update Uses's Name, Major, and to Logout:
 		generateSettingsObjects (userNameUpdateSprite, userMajorUpdateSprite, userLogOutSprite);
@@ -97,12 +106,12 @@ public class Settings : MonoBehaviour {
 	
 		void OnGUI () {
 			// Labels:
-			GUI.Label (new Rect (Screen.width/8, 0.35f * Screen.height / 5, Screen.width / 2, Screen.height / 10), "Update Username", labelStyle);
-			GUI.Label (new Rect (Screen.width/8, 1.550f * Screen.height / 5, Screen.width / 2, Screen.height / 10), "Update Major", labelStyle);
+			GUI.Label (new Rect (Screen.width/8, 0.35f * Screen.height / 5, Screen.width / 2, Screen.height / 10),enterUserNameString, labelStyleText);
+			GUI.Label (new Rect (Screen.width/8, 1.550f * Screen.height / 5, Screen.width / 2, Screen.height / 10), enterMajorString, labelStyleText);
 	
 			// TextFields:
-			userNameString = GUI.TextField(new Rect(Screen.width/8, 0.75f * Screen.height/5f, Screen.width/2.5f, Screen.height/10), userNameString, 20);
-			userMajorString	= GUI.TextField(new Rect(Screen.width/8, 2.0f * Screen.height/5f, Screen.width/2.5f, Screen.height/10), userMajorString, 50);
+			userNameString = GUI.TextField(new Rect(Screen.width/8, 0.75f * Screen.height/5f, Screen.width/2.5f, Screen.height/10), userNameString, 20, labelStyleInput);
+			userMajorString	= GUI.TextField(new Rect(Screen.width/8, 2.0f * Screen.height/5f, Screen.width/2.5f, Screen.height/10), userMajorString, 50, labelStyleInput);
 		}
 	
 	// Helper for dynamically scaling the buttons (x)
@@ -130,7 +139,8 @@ public class Settings : MonoBehaviour {
 			GameObject tempIA = (GameObject)userNameUpdateObject;
 			if (tempIA.GetComponent<Collider>().Raycast(ray, out hit, 100.0F))
 			{
-				Debug.LogWarning("User Updated UserName!");
+				Debug.Log("User Updated UserName!");
+                enterUserNameString = "Username Updated";
 				AppController.appController.setUsername(userNameString);
 				AppController.appController.Save ();
 			}
@@ -138,7 +148,8 @@ public class Settings : MonoBehaviour {
 			GameObject tempGA = (GameObject)userMajorUpdateObject;
 			if (tempGA.GetComponent<Collider>().Raycast(ray, out hit, 100.0F))
 			{
-				Debug.LogWarning("User Updated UserMajor!");
+				Debug.Log("User Updated UserMajor!");
+                enterMajorString = "Major Updated";
 				AppController.appController.setMajor(userMajorString);
 				AppController.appController.Save ();
 			}
@@ -146,7 +157,7 @@ public class Settings : MonoBehaviour {
 			GameObject tempSC = (GameObject)userLogOutObject;
 			if (tempSC.GetComponent<Collider>().Raycast(ray, out hit, 100.0F))
 			{
-				Debug.Log ("LOGGIN THE FUCK OUT!");
+				Debug.Log ("Logging out");
 				AppController.appController.setLoggedIn (false);
 				AppController.appController.Save ();
 				Application.LoadLevel("Log In");
