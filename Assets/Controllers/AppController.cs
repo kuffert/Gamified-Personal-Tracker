@@ -107,6 +107,7 @@ public class AppController : MonoBehaviour {
 			UserData data = (UserData)bf.Deserialize(file);
 			file.Close();
             data.loadUserData(this);
+            Debug.Log(data.getUsersSelectedOpportunities());
 		}
 	}
 	
@@ -215,9 +216,14 @@ public class AppController : MonoBehaviour {
             appController.setSCExp(getSCExp());
             appController.setPPExp(getPPEExp());
             appController.setWBExp(getWBexp());
-            appController.setAllOpportunities(getAllOpportunities());
-            appController.setUsersSelectedOpportunities(getUsersSelectedOpportunities());
-            appController.setUsersCompletedOpportunities(getUsersCompletedOpportunities());
+
+            List<Opportunity> allOpps = getAllOpportunities();
+            List<Opportunity> usersSelectedOpps = getUsersSelectedOpportunities();
+            List<Opportunity> usersCompletedOpps = getUsersCompletedOpportunities();
+            appController.setAllOpportunities(allOpps == null? new List<Opportunity>() : allOpps);
+            appController.setUsersSelectedOpportunities(usersSelectedOpportunities == null ? new List<Opportunity>() : usersSelectedOpportunities);
+            appController.setUsersCompletedOpportunities(usersCompletedOpportunities == null ? new List<Opportunity>() : usersCompletedOpportunities);
+
             appController.setOpportunityFeedIndex(getOpportunityIndex());
             appController.setUsersSelectedOpportunityIndex(getUsersSelectedOpportunityIndex());
             appController.setUsersCompletedOpportunityIndex(getUsersCompletedOpportunityIndex());
